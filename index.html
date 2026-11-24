@@ -456,9 +456,27 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 2px;
+      padding: 6px 4px;
       border-bottom: 1px solid #e3ecf5;
       font-size: 12px;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+
+    .friend-row:hover {
+      background: #eaf2fb;
+    }
+
+    .friend-badge {
+      display: inline-block;
+      margin-left: 4px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: bold;
+      background: #dff3e6;
+      color: #157a38;
+      border: 1px solid #9ed4b1;
     }
 
     .mini-mono {
@@ -477,6 +495,127 @@
 
     .mini-mono.lm { background: #a8d59b; }
     .mini-mono.ap { background: #f2a39b; }
+
+    /* Janela de conversa flutuante acima */
+    .chat-window {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 335px;
+      max-width: calc(100vw - 24px);
+      background: var(--bg-panel);
+      border: 1px solid #2d5a8a;
+      border-radius: 6px 6px 4px 4px;
+      box-shadow: 0 10px 28px rgba(15, 38, 66, 0.28);
+      z-index: 9999;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-window.open {
+      display: flex;
+    }
+
+    .chat-titlebar {
+      background: linear-gradient(180deg, #7fb3e6 0%, #3d73ad 100%);
+      color: #fff;
+      padding: 7px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .chat-subbar {
+      background: #eaf2fa;
+      border-bottom: 1px solid var(--border);
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .friend-toggle-btn {
+      font-size: 11px;
+      padding: 4px 8px;
+      background: linear-gradient(180deg, #fffdf7 0%, #fff0c2 100%);
+      color: #6b3e00;
+      border: 1px solid #c98518;
+      box-shadow: inset 0 1px 0 #ffffff;
+    }
+
+    .friend-toggle-btn.is-friend {
+      background: linear-gradient(180deg, #e9f9ef 0%, #c8ebd4 100%);
+      color: #146c32;
+      border: 1px solid #57ad75;
+    }
+
+    .chat-win-actions {
+      display: inline-flex;
+      gap: 4px;
+    }
+
+    .chat-win-btn {
+      width: 22px;
+      height: 20px;
+      padding: 0;
+      font-size: 11px;
+      line-height: 1;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      box-shadow: none;
+    }
+
+    .chat-subbar.minimized,
+    .chat-body.minimized,
+    .chat-footer.minimized {
+      display: none;
+    }
+
+    .chat-body {
+      padding: 10px;
+      max-height: 240px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: #f2f7fd;
+      font-size: 12px;
+    }
+
+    .chat-msg {
+      padding: 7px 9px;
+      border-radius: 5px;
+      max-width: 88%;
+      line-height: 1.4;
+    }
+
+    .chat-msg.them {
+      align-self: flex-start;
+      background: #fff7e6;
+      border: 1px solid #e6d3ad;
+    }
+
+    .chat-msg.me {
+      align-self: flex-end;
+      background: #e2effc;
+      border: 1px solid #b5d0ec;
+    }
+
+    .chat-footer {
+      display: flex;
+      gap: 6px;
+      padding: 8px;
+      background: #e6eff8;
+      border-top: 1px solid var(--border);
+    }
 
     select, input {
       font-family: inherit;
@@ -703,7 +842,7 @@
 
         <div class="stats-row"><span>Recados:</span><strong>148</strong></div>
         <div class="stats-row"><span>Depoimentos:</span><strong>19</strong></div>
-        <div class="stats-row"><span>Amigos:</span><strong>84</strong></div>
+        <div class="stats-row"><span>Amigos:</span><strong id="contadorAmigos">84</strong></div>
 
         <div class="meter-item">
           <div class="meter-label"><span>😊 Legal</span><strong>95%</strong></div>
@@ -827,29 +966,30 @@
 
     <aside>
       <div class="panel">
-        <h3>Amigos Online</h3>
+        <h3>Contatos &amp; Amigos</h3>
+        <div style="font-size:11px; color:var(--muted); margin-bottom:6px;">Clique no contato para conversar e gerenciar amizade.</div>
         <input id="buscaContatoInput" type="text" placeholder="Buscar contato ou grupo..." oninput="filtrarContatos()" style="width:100%; margin-bottom:6px;" />
 
-        <div class="group-header" onclick="toggleGrupo('grupoAmigos')">▾ Amigos Online</div>
+        <div class="group-header" onclick="toggleGrupo('grupoAmigos')">▾ Contatos Online</div>
         <div id="grupoAmigos" class="group-body">
-          <div class="friend-row" data-busca="mariana alves saudades das conversas">
+          <div class="friend-row" data-contato="Mariana Alves" data-busca="mariana alves saudades das conversas amigo" onclick="abrirConversa('Mariana Alves', 'Online • Disponível', 'Oi Silvio! Vi que você está on — bora conversar sobre o texto?')">
             <div class="mini-mono">MA</div>
             <div style="flex:1;">
-              <strong><span class="status-dot online"></span> Mariana Alves</strong><br />
+              <strong><span class="status-dot online"></span> Mariana Alves <span class="friend-tag"></span></strong><br />
               <span style="color:var(--muted);">Saudades das conversas</span>
             </div>
           </div>
-          <div class="friend-row" data-busca="lucas mendes trabalhando">
+          <div class="friend-row" data-contato="Lucas Mendes" data-busca="lucas mendes trabalhando amigo" onclick="abrirConversa('Lucas Mendes', 'Ausente • Volto em 30 min', 'Fala Silvio! Deixei uma ideia lá na comunidade de música :)')">
             <div class="mini-mono lm">LM</div>
             <div style="flex:1;">
-              <strong><span class="status-dot ausente-30"></span> Lucas Mendes</strong><br />
+              <strong><span class="status-dot ausente-30"></span> Lucas Mendes <span class="friend-tag"></span></strong><br />
               <span style="color:var(--muted);">Trabalhando...</span>
             </div>
           </div>
-          <div class="friend-row" data-busca="ana paula ocupada">
+          <div class="friend-row" data-contato="Ana Paula" data-busca="ana paula ocupada amigo" onclick="abrirConversa('Ana Paula', 'Ocupado • Escrevendo', 'Oi Silvio! Tô finalizando uma faixa para o Palco Aberto MP3.')">
             <div class="mini-mono ap">AP</div>
             <div style="flex:1;">
-              <strong><span class="status-dot ocupado-criando"></span> Ana Paula</strong><br />
+              <strong><span class="status-dot ocupado-criando"></span> Ana Paula <span class="friend-tag"></span></strong><br />
               <span style="color:var(--muted);">Ocupada</span>
             </div>
           </div>
@@ -857,11 +997,11 @@
 
         <div class="group-header" onclick="toggleGrupo('grupoComunidades')">▾ Comunidades</div>
         <div id="grupoComunidades" class="group-body">
-          <div class="friend-row" data-busca="veritas e fe palavra e verdade">
+          <div class="friend-row" data-busca="veritas e fe palavra e verdade" onclick="abrirConversa('Veritas & Fé', 'Comunidade • Ativa', 'Bem-vindo ao espaço de diálogo e palavra.')">
             <div class="mini-mono lm">VF</div>
             <div><strong>Veritas &amp; Fé</strong><br /><span style="color:var(--muted);">Palavra e verdade</span></div>
           </div>
-          <div class="friend-row" data-busca="compositores e letras palco aberto">
+          <div class="friend-row" data-busca="compositores e letras palco aberto" onclick="abrirConversa('Compositores & Letras', 'Comunidade • Ativa', 'Compartilhe suas letras e ideias sem pressa.')">
             <div class="mini-mono ap">CL</div>
             <div><strong>Compositores &amp; Letras</strong><br /><span style="color:var(--muted);">Palco aberto</span></div>
           </div>
@@ -870,11 +1010,38 @@
     </aside>
   </main>
 
+  <!-- Janela flutuante de conversa ao clicar no contato -->
+  <div class="chat-window" id="chatWindow" role="dialog" aria-label="Janela de conversa">
+    <div class="chat-titlebar">
+      <div>
+        <span id="chatContactName">Conversa</span>
+        <div id="chatContactStatus" style="font-size:10px; font-weight:normal; opacity:0.95;">Online</div>
+      </div>
+      <div class="chat-win-actions">
+        <button type="button" class="chat-win-btn" onclick="minimizarConversa()" title="Minimizar">—</button>
+        <button type="button" class="chat-win-btn" onclick="fecharConversa()" title="Fechar">✕</button>
+      </div>
+    </div>
+    <div class="chat-subbar" id="chatSubbar">
+      <span id="chatFriendshipLabel">Status do contato: Contato</span>
+      <button type="button" id="friendToggleBtn" class="friend-toggle-btn" onclick="alternarAmigo()">⭐ Tornar Amigo</button>
+    </div>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="chat-footer" id="chatFooter">
+      <input id="chatInput" type="text" placeholder="Digite sua mensagem..." style="flex:1;" onkeydown="if(event.key==='Enter') enviarMensagemChat()" />
+      <button type="button" onclick="enviarMensagemChat()">Enviar</button>
+    </div>
+  </div>
+
   <script>
     let errosLetras = 0;
     const letrasAcertadas = new Set();
     const palavraAlvo = "VERITAS";
     const velhaEstado = ["X", "", "O", "", "X", "", "", "", "O"];
+    let contatoAtivo = "";
+    const historicosChat = {};
+    const amigosSet = new Set();
+    const contatosIndividuais = new Set(["Mariana Alves", "Lucas Mendes", "Ana Paula"]);
 
     const statusConfig = {
       "online": { texto: "Online • Disponível" },
@@ -883,6 +1050,142 @@
       "reflexao": { texto: "Em Reflexão / Leitura" },
       "ouvindo": { texto: "Ouvindo Rádio / Música" }
     };
+
+    function carregarAmigosSalvos() {
+      try {
+        const raw = localStorage.getItem("libervox_amigos");
+        if (raw) {
+          JSON.parse(raw).forEach((n) => amigosSet.add(n));
+        }
+      } catch (e) {}
+      atualizarBadgesAmigos();
+    }
+
+    function salvarAmigos() {
+      try {
+        localStorage.setItem("libervox_amigos", JSON.stringify([...amigosSet]));
+      } catch (e) {}
+      atualizarBadgesAmigos();
+    }
+
+    function atualizarBadgesAmigos() {
+      document.querySelectorAll(".friend-row[data-contato]").forEach((row) => {
+        const nome = row.dataset.contato;
+        const tag = row.querySelector(".friend-tag");
+        if (!tag) return;
+        if (amigosSet.has(nome)) {
+          tag.innerHTML = '<span class="friend-badge">• Amigo</span>';
+        } else {
+          tag.innerHTML = "";
+        }
+      });
+
+      const base = 84;
+      const counterEl = document.getElementById("contadorAmigos");
+      if (counterEl) {
+        counterEl.textContent = String(base + amigosSet.size);
+      }
+      atualizarBotaoAmigoNaJanela();
+    }
+
+    function atualizarBotaoAmigoNaJanela() {
+      if (!contatoAtivo) return;
+      const subbar = document.getElementById("chatSubbar");
+      const label = document.getElementById("chatFriendshipLabel");
+      const btn = document.getElementById("friendToggleBtn");
+
+      if (!contatosIndividuais.has(contatoAtivo)) {
+        subbar.style.display = "none";
+        return;
+      }
+
+      subbar.style.display = "flex";
+      const ehAmigo = amigosSet.has(contatoAtivo);
+      if (ehAmigo) {
+        label.textContent = "Status do contato: Amigo";
+        btn.textContent = "✓ Amigo (Remover)";
+        btn.className = "friend-toggle-btn is-friend";
+      } else {
+        label.textContent = "Status do contato: Contato";
+        btn.textContent = "⭐ Tornar Amigo";
+        btn.className = "friend-toggle-btn";
+      }
+    }
+
+    function alternarAmigo() {
+      if (!contatoAtivo || !contatosIndividuais.has(contatoAtivo)) return;
+      if (amigosSet.has(contatoAtivo)) {
+        amigosSet.delete(contatoAtivo);
+      } else {
+        amigosSet.add(contatoAtivo);
+      }
+      salvarAmigos();
+    }
+
+    function abrirConversa(nome, statusTexto, mensagemInicial) {
+      contatoAtivo = nome;
+      document.getElementById("chatContactName").textContent = nome;
+      document.getElementById("chatContactStatus").textContent = statusTexto;
+
+      if (!historicosChat[nome]) {
+        historicosChat[nome] = [{ autor: "them", texto: mensagemInicial }];
+      }
+
+      atualizarBotaoAmigoNaJanela();
+      renderizarMensagensChat();
+      document.getElementById("chatSubbar").classList.remove("minimized");
+      document.getElementById("chatBody").classList.remove("minimized");
+      document.getElementById("chatFooter").classList.remove("minimized");
+      document.getElementById("chatWindow").classList.add("open");
+      document.getElementById("chatInput").focus();
+    }
+
+    function renderizarMensagensChat() {
+      const body = document.getElementById("chatBody");
+      body.innerHTML = "";
+      const msgs = historicosChat[contatoAtivo] || [];
+      msgs.forEach((m) => {
+        const div = document.createElement("div");
+        div.className = "chat-msg " + (m.autor === "me" ? "me" : "them");
+        div.textContent = m.texto;
+        body.appendChild(div);
+      });
+      body.scrollTop = body.scrollHeight;
+    }
+
+    function enviarMensagemChat() {
+      const input = document.getElementById("chatInput");
+      const texto = input.value.trim();
+      if (!texto || !contatoAtivo) return;
+
+      if (!historicosChat[contatoAtivo]) {
+        historicosChat[contatoAtivo] = [];
+      }
+      historicosChat[contatoAtivo].push({ autor: "me", texto });
+      input.value = "";
+      renderizarMensagensChat();
+
+      const nomeAtual = contatoAtivo;
+      setTimeout(() => {
+        historicosChat[nomeAtual].push({
+          autor: "them",
+          texto: "Recebi aqui, Silvio! Seguimos conversando por aqui."
+        });
+        if (contatoAtivo === nomeAtual) {
+          renderizarMensagensChat();
+        }
+      }, 450);
+    }
+
+    function minimizarConversa() {
+      document.getElementById("chatSubbar").classList.toggle("minimized");
+      document.getElementById("chatBody").classList.toggle("minimized");
+      document.getElementById("chatFooter").classList.toggle("minimized");
+    }
+
+    function fecharConversa() {
+      document.getElementById("chatWindow").classList.remove("open");
+    }
 
     function aplicarMonograma() {
       const select = document.getElementById("monogramSelect");
@@ -1121,7 +1424,9 @@
     }
 
     carregarMonogramaSalvo();
+    carregarAmigosSalvos();
     renderVelha();
   </script>
 </body>
 </html>
+
