@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LiberVox • Veritas</title>
+  <title>LIBERVOX • Veritas</title>
   <style>
     :root {
       --bg-page: #dce7f3;
@@ -54,7 +54,7 @@
     .nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
     }
 
     .nav a {
@@ -66,6 +66,10 @@
       font-size: 13px;
     }
 
+    .nav a:hover {
+      background: rgba(255, 255, 255, 0.28);
+    }
+
     .subbar {
       background: var(--bg-subbar);
       border-bottom: 1px solid var(--border);
@@ -74,21 +78,21 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      font-size: 13px;
+      gap: 10px;
+      font-size: 12px;
     }
 
     .radio-box, .latin-audio-box {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .latin-banner {
-      max-width: 1160px;
-      margin: 14px auto 0;
-      padding: 12px 16px;
+      max-width: 1180px;
+      margin: 12px auto 0;
+      padding: 10px 16px;
       background: var(--bg-panel);
       border: 1px solid var(--border);
       border-left: 4px solid var(--accent);
@@ -96,28 +100,28 @@
     }
 
     .latin-quote {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: bold;
       font-style: italic;
       color: var(--accent);
     }
 
     .latin-translation {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--muted);
-      margin-top: 3px;
+      margin-top: 2px;
     }
 
     .grid {
-      max-width: 1160px;
-      margin: 14px auto 28px;
+      max-width: 1180px;
+      margin: 12px auto 28px;
       padding: 0 12px;
       display: grid;
       grid-template-columns: 250px 1fr 250px;
       gap: 14px;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 920px) {
       .grid { grid-template-columns: 1fr; }
     }
 
@@ -138,56 +142,18 @@
     }
 
     .monogram {
-      width: 72px;
-      height: 72px;
+      width: 76px;
+      height: 76px;
       border-radius: 6px;
       background: #2c629e;
       color: #f7d358;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
+      font-size: 28px;
       font-weight: bold;
-      margin: 0 auto 10px;
+      margin: 0 auto 8px;
       border: 2px solid #1d446e;
-    }
-
-    .friend-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 0;
-      border-bottom: 1px solid #e3ecf5;
-      font-size: 13px;
-    }
-
-    .mini-mono {
-      width: 30px;
-      height: 30px;
-      border-radius: 4px;
-      background: #476c94;
-      color: #fff;
-      font-size: 11px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    button, select, input {
-      font-family: inherit;
-      font-size: 13px;
-      padding: 6px 10px;
-      border-radius: 3px;
-      border: 1px solid var(--border);
-    }
-
-    button {
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      cursor: pointer;
     }
 
     .support-btn {
@@ -197,16 +163,120 @@
       background: #fff7e6;
       color: #7a4900;
       border: 1px solid var(--gold);
-      padding: 8px;
+      padding: 7px 8px;
       border-radius: 4px;
       font-size: 12px;
       font-weight: bold;
-      margin-top: 10px;
+      margin: 8px 0 10px;
+    }
+
+    .stats-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      padding: 3px 0;
+    }
+
+    .meter-item {
+      margin-top: 8px;
+      font-size: 12px;
+    }
+
+    .meter-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2px;
+    }
+
+    .meter-track {
+      height: 8px;
+      background: #e1ebf5;
+      border: 1px solid #b6c8dc;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .meter-fill {
+      height: 100%;
+      background: #5b87b8;
+    }
+
+    .friend-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px solid #e3ecf5;
+      font-size: 12px;
+    }
+
+    .mini-mono {
+      width: 30px;
+      height: 30px;
+      border-radius: 4px;
+      background: #7c4d8a;
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .mini-mono.lm { background: #3b7a57; }
+    .mini-mono.ap { background: #9c4a3b; }
+
+    button, select, input {
+      font-family: inherit;
+      font-size: 12px;
+      padding: 6px 9px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+    }
+
+    button {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 680px) {
+      .games-grid { grid-template-columns: 1fr; }
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 38px);
+      gap: 4px;
+      margin: 8px 0;
+    }
+
+    .cell {
+      width: 38px;
+      height: 38px;
+      background: #eef4fa;
+      border: 1px solid var(--border);
+      color: var(--accent);
+      font-size: 15px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
     }
 
     .notes {
-      font-size: 18px;
-      letter-spacing: 3px;
+      font-size: 17px;
+      letter-spacing: 2px;
       margin: 6px 0;
     }
   </style>
@@ -216,6 +286,8 @@
     <div class="brand">LIBERVOX <span>• Veritas</span></div>
     <nav class="nav">
       <a href="#inicio">Início</a>
+      <a href="#perfil">Perfil</a>
+      <a href="#recados">Recados (12)</a>
       <a href="#comunidades">Comunidades</a>
       <a href="#encontros">Ponto de Encontro</a>
       <a href="#palco">Palco Aberto MP3</a>
@@ -225,20 +297,25 @@
 
   <div class="subbar">
     <div class="radio-box">
-      <strong>Rádio:</strong>
+      <strong>Silvio Oliveira (silvio@libervox.net)</strong> — Escrevendo ideias sem filtro...
       <select id="stationSelect">
-        <option value="bbn">BBN — Rádio Cristã (Global)</option>
-        <option value="rock">Rock &amp; Melancólico</option>
-        <option value="classica">Clássica &amp; Instrumental</option>
+        <option value="bbn">Rádio: BBN (Cristã • Global)</option>
+        <option value="rock">Rádio: Rock &amp; Melancólico</option>
+        <option value="classica">Rádio: Clássica &amp; Instrumental</option>
       </select>
       <button type="button" onclick="toggleRadio()">▶ / ⏹</button>
-      <span id="radioStatus">Pronta para sintonizar</span>
+      <span id="radioStatus">Ouvindo agora: BBN • Alcance Global</span>
     </div>
 
     <div class="latin-audio-box">
-      <strong>Pater Noster (em latim):</strong>
-      <button type="button" onclick="togglePaterNoster()">▶ Escutar MP3</button>
+      <strong>Pai Nosso em latim (MP3):</strong>
+      <button type="button" id="paterBtn" onclick="togglePaterNoster()">▶ Escutar</button>
       <audio id="paterNosterAudio" src="./pater-noster.mp3"></audio>
+      <select id="statusSelect">
+        <option>Online</option>
+        <option>Ausente</option>
+        <option>Ocupado</option>
+      </select>
     </div>
   </div>
 
@@ -248,69 +325,152 @@
   </section>
 
   <main class="grid">
-    <aside>
+    <aside id="perfil">
       <div class="panel">
         <div class="monogram">SO</div>
-        <div style="text-align:center; font-weight:bold;">Silvio Oliveira</div>
-        <div style="text-align:center; font-size:12px; color:var(--muted);">silvio@libervox.net • Global</div>
+        <div style="text-align:center; font-weight:bold;">● Disponível</div>
+        <div style="text-align:center; font-size:12px; color:var(--muted);">Alcance Global • Curitiba / PR</div>
+
         <a class="support-btn" href="https://cvv.org.br" target="_blank" rel="noopener noreferrer">
-          💛 Apoio Emocional 24h (CVV — Ligue 188 ou Chat)
+          💛 Precisa conversar? Apoio Emocional 24h (CVV — Ligue 188 ou Chat)
         </a>
+
+        <div style="font-size:12px; margin-bottom:8px;">
+          <strong>Sorte de Hoje:</strong> Uma boa conversa vale mais que mil fotos.
+        </div>
+
+        <div class="stats-row"><span>Recados:</span><strong>148</strong></div>
+        <div class="stats-row"><span>Depoimentos:</span><strong>19</strong></div>
+        <div class="stats-row"><span>Amigos:</span><strong>84</strong></div>
+
+        <div class="meter-item">
+          <div class="meter-label"><span>😊 Legal</span><strong>95%</strong></div>
+          <div class="meter-track"><div class="meter-fill" style="width:95%;"></div></div>
+        </div>
+        <div class="meter-item">
+          <div class="meter-label"><span>💬 Papo Bom</span><strong>98%</strong></div>
+          <div class="meter-track"><div class="meter-fill" style="width:98%;"></div></div>
+        </div>
+        <div class="meter-item">
+          <div class="meter-label"><span>🎵 Criativo</span><strong>92%</strong></div>
+          <div class="meter-track"><div class="meter-fill" style="width:92%;"></div></div>
+        </div>
+
+        <div style="margin-top:12px; font-size:12px;">
+          <strong>Quem passou aqui:</strong>
+          <div>Mariana Alves</div>
+          <div>Lucas Mendes</div>
+          <div>Ana Paula</div>
+        </div>
+      </div>
+
+      <div class="panel" id="email">
+        <h3>Correio @libervox.net</h3>
+        <input id="destinoEmail" type="text" placeholder="Para: amigo@libervox.net" style="width:100%; margin-bottom:6px;" />
+        <input id="mensagemEmail" type="text" placeholder="Mensagem interna..." style="width:100%; margin-bottom:8px;" />
+        <button type="button" style="width:100%;" onclick="enviarCorreioInterno()">Enviar no @libervox.net</button>
+        <div id="statusCorreio" style="font-size:11px; color:var(--accent); margin-top:6px;"></div>
       </div>
     </aside>
 
     <section>
-      <div class="panel" id="inicio">
-        <h3>Mural de Ideias (Sem Fotos)</h3>
-        <p style="font-size:13px; margin:0 0 10px;">
-          Espaço para recados, letras, reflexões e conversas diretas com alcance global.
-        </p>
+      <div class="panel" id="recados">
+        <h3>Mural de Recados (Sem Fotos)</h3>
         <div style="display:flex; gap:8px;">
-          <input id="recadoInput" type="text" placeholder="Escreva um recado ou reflexão..." style="flex:1;" />
-          <button type="button" onclick="addRecado()">Publicar</button>
+          <input id="recadoInput" type="text" placeholder="O que você está pensando, escrevendo ou ouvindo agora?" style="flex:1;" />
+          <button type="button" onclick="addRecado()">Publicar Recado</button>
         </div>
         <ul id="recadosLista" style="padding-left:18px; font-size:13px; margin-top:12px;">
-          <li><strong>@mari_a:</strong> Que bom ver a LiberVox ganhando forma com texto, música e verdade.</li>
+          <li><strong>Mariana Alves @mari_a:</strong> Li seu texto ontem e lembrei daquela música dos anos 80 que você falou :)</li>
         </ul>
       </div>
 
-      <div class="panel">
-        <h3>Letras Perdidas</h3>
-        <p style="font-size:13px; margin:0;">Palavra-chave musical: <strong>V _ R I T _ S</strong></p>
-        <div class="notes" id="notasDisplay">🎵 🎵 🎵 🎵 🎵 🎵</div>
-        <div style="display:flex; gap:8px;">
-          <input id="palpiteInput" type="text" maxlength="1" placeholder="Letra" style="width:70px;" />
-          <button type="button" onclick="tentarLetra()">Tentar Letra</button>
-          <span id="feedbackLetra" style="font-size:13px; align-self:center;"></span>
+      <div class="panel" id="encontros">
+        <h3>Ponto de Encontro • Global / Curitiba</h3>
+        <div style="font-size:13px;">
+          <strong>Tarde de Violão e Papo no Parque</strong><br />
+          <span>Local: Parque Barigui (área pública) • Data: Sábado, 28/11 às 15:30</span><br />
+          <span><strong>Dicas para nos achar:</strong> Camiseta preta e violão; mochila azul e caderno.</span>
+        </div>
+        <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" onclick="alert('Presença confirmada no Ponto de Encontro!')">✓ Confirmar Presença</button>
+          <button type="button" onclick="alert('Chat exclusivo do encontro aberto.')">💬 Chat do Encontro</button>
         </div>
       </div>
 
-      <div class="panel" id="encontros">
-        <h3>Ponto de Encontro (Locais Públicos por Cidade)</h3>
-        <p style="font-size:13px; margin:0;">
-          <strong>Parque Barigui • Curitiba</strong> — Encontros em espaços abertos e públicos, com dicas de reconhecimento por texto (sem fotos).
+      <div class="panel">
+        <h3>Jogos de Raciocínio</h3>
+        <div class="games-grid">
+          <div>
+            <strong>Jogo da Velha</strong>
+            <div class="board" id="velhaBoard"></div>
+            <span style="font-size:12px; color:var(--muted);">Seu turno (X)</span>
+          </div>
+
+          <div>
+            <strong>Letras Perdidas</strong>
+            <div style="font-size:13px;">Palavra: <strong id="palavraSecretaDisplay">V _ R I T _ S</strong></div>
+            <div class="notes" id="notasDisplay">🎵 🎵 🎵 🎵 🎵 🎵</div>
+            <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+              <input id="palpiteInput" type="text" maxlength="1" placeholder="Letra" style="width:62px;" />
+              <button type="button" onclick="tentarLetra()">Tentar Letra</button>
+            </div>
+            <div id="feedbackLetra" style="font-size:12px; margin-top:4px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="comunidades">
+        <h3>Comunidades &amp; Palco Aberto MP3</h3>
+        <p style="font-size:12px; margin:0;" id="palco">
+          Comunidades criadas pelos membros, alcance global, faixas independentes em MP3 e troca de ideias sem filtro visual.
         </p>
       </div>
     </section>
 
     <aside>
       <div class="panel">
-        <h3>Conexões Online</h3>
+        <h3>Amigos Online</h3>
         <div class="friend-row">
           <div class="mini-mono">MA</div>
-          <div><strong>Mariana Alves</strong><br /><span style="color:var(--muted); font-size:12px;">Ouvindo BBN</span></div>
+          <div><strong>Mariana Alves</strong><br /><span style="color:var(--muted);">Saudades das conversas</span></div>
         </div>
         <div class="friend-row">
-          <div class="mini-mono">LM</div>
-          <div><strong>Lucas Mendes</strong><br /><span style="color:var(--muted); font-size:12px;">Escrevendo letra</span></div>
+          <div class="mini-mono lm">LM</div>
+          <div><strong>Lucas Mendes</strong><br /><span style="color:var(--muted);">Ouvindo BBN</span></div>
+        </div>
+        <div class="friend-row">
+          <div class="mini-mono ap">AP</div>
+          <div><strong>Ana Paula</strong><br /><span style="color:var(--muted);">No Palco Aberto MP3</span></div>
         </div>
       </div>
     </aside>
   </main>
 
   <script>
-    let radioTocando = false;
+    let radioTocando = true;
     let errosLetras = 0;
+    const letrasAcertadas = new Set();
+    const palavraAlvo = "VERITAS";
+    const velhaEstado = ["X", "", "O", "", "X", "", "", "", "O"];
+
+    function renderVelha() {
+      const board = document.getElementById("velhaBoard");
+      board.innerHTML = "";
+      velhaEstado.forEach((val, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "cell";
+        btn.textContent = val;
+        btn.onclick = () => {
+          if (!velhaEstado[idx]) {
+            velhaEstado[idx] = "X";
+            renderVelha();
+          }
+        };
+        board.appendChild(btn);
+      });
+    }
 
     function toggleRadio() {
       const select = document.getElementById("stationSelect");
@@ -323,13 +483,29 @@
 
     function togglePaterNoster() {
       const audio = document.getElementById("paterNosterAudio");
+      const btn = document.getElementById("paterBtn");
       if (audio.paused) {
-        audio.play().catch(() => {
+        audio.play().then(() => {
+          btn.textContent = "⏸ Pausar";
+        }).catch(() => {
           alert("Envie o arquivo pater-noster.mp3 na raiz do repositório libervox para tocar o áudio.");
         });
       } else {
         audio.pause();
+        btn.textContent = "▶ Escutar";
       }
+    }
+
+    function enviarCorreioInterno() {
+      const destino = document.getElementById("destinoEmail").value.trim();
+      const msg = document.getElementById("mensagemEmail").value.trim();
+      const status = document.getElementById("statusCorreio");
+      if (!destino || !msg) {
+        status.textContent = "Preencha o destinatário e a mensagem.";
+        return;
+      }
+      status.textContent = "Enviado na rede LiberVox para " + destino + ".";
+      document.getElementById("mensagemEmail").value = "";
     }
 
     function addRecado() {
@@ -338,9 +514,17 @@
       const texto = input.value.trim();
       if (!texto) return;
       const li = document.createElement("li");
-      li.innerHTML = "<strong>@silvio:</strong> " + texto.replace(/</g, "&lt;");
+      li.innerHTML = "<strong>Silvio @silvio:</strong> " + texto.replace(/</g, "&lt;");
       lista.prepend(li);
       input.value = "";
+    }
+
+    function atualizarPalavra() {
+      const display = document.getElementById("palavraSecretaDisplay");
+      display.textContent = palavraAlvo
+        .split("")
+        .map((ch) => (letrasAcertadas.has(ch) ? ch : "_"))
+        .join(" ");
     }
 
     function tentarLetra() {
@@ -351,18 +535,26 @@
       input.value = "";
       if (!letra) return;
 
-      if (["E", "A"].includes(letra)) {
-        feedback.textContent = "A letra '" + letra + "' faz parte da palavra!";
+      if (palavraAlvo.includes(letra)) {
+        letrasAcertadas.add(letra);
+        atualizarPalavra();
+        const completou = palavraAlvo.split("").every((ch) => letrasAcertadas.has(ch));
+        feedback.textContent = completou
+          ? "Parabéns! Você completou VERITAS!"
+          : "A letra '" + letra + "' está na palavra.";
       } else {
         errosLetras = Math.min(6, errosLetras + 1);
         const acesas = "🎵 ".repeat(6 - errosLetras).trim();
         const apagadas = "⚪ ".repeat(errosLetras).trim();
         notas.textContent = (acesas + " " + apagadas).trim();
-        feedback.textContent = "Não estava nessa — restam " + (6 - errosLetras) + " notas.";
+        feedback.textContent = errosLetras >= 6
+          ? "As notas acabaram! Tente novamente."
+          : "Não estava nessa — restam " + (6 - errosLetras) + " notas.";
       }
     }
+
+    renderVelha();
   </script>
 </body>
 </html>
-
 
