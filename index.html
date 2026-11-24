@@ -1,1 +1,368 @@
-# libervox
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LiberVox • Veritas</title>
+  <style>
+    :root {
+      --bg-page: #dce7f3;
+      --bg-panel: #f7faff;
+      --bg-header: #5b87b8;
+      --bg-subbar: #e6eff8;
+      --border: #b6c8dc;
+      --text: #1c2833;
+      --muted: #52657a;
+      --accent: #2c629e;
+      --gold: #d98a1c;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: var(--bg-page);
+      color: var(--text);
+    }
+
+    .topbar {
+      background: var(--bg-header);
+      color: #fff;
+      padding: 10px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 2px solid #3f6691;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+
+    .brand span {
+      font-weight: normal;
+      font-style: italic;
+      font-size: 14px;
+      opacity: 0.92;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .nav a {
+      color: #fff;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.16);
+      padding: 6px 10px;
+      border-radius: 3px;
+      font-size: 13px;
+    }
+
+    .subbar {
+      background: var(--bg-subbar);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .radio-box, .latin-audio-box {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .latin-banner {
+      max-width: 1160px;
+      margin: 14px auto 0;
+      padding: 12px 16px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 4px;
+    }
+
+    .latin-quote {
+      font-size: 16px;
+      font-weight: bold;
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .latin-translation {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .grid {
+      max-width: 1160px;
+      margin: 14px auto 28px;
+      padding: 0 12px;
+      display: grid;
+      grid-template-columns: 250px 1fr 250px;
+      gap: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+
+    .panel h3 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+    }
+
+    .monogram {
+      width: 72px;
+      height: 72px;
+      border-radius: 6px;
+      background: #2c629e;
+      color: #f7d358;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: bold;
+      margin: 0 auto 10px;
+      border: 2px solid #1d446e;
+    }
+
+    .friend-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px solid #e3ecf5;
+      font-size: 13px;
+    }
+
+    .mini-mono {
+      width: 30px;
+      height: 30px;
+      border-radius: 4px;
+      background: #476c94;
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    button, select, input {
+      font-family: inherit;
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+    }
+
+    button {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .support-btn {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      background: #fff7e6;
+      color: #7a4900;
+      border: 1px solid var(--gold);
+      padding: 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .notes {
+      font-size: 18px;
+      letter-spacing: 3px;
+      margin: 6px 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">LIBERVOX <span>• Veritas</span></div>
+    <nav class="nav">
+      <a href="#inicio">Início</a>
+      <a href="#comunidades">Comunidades</a>
+      <a href="#encontros">Ponto de Encontro</a>
+      <a href="#palco">Palco Aberto MP3</a>
+      <a href="#email">E-mail (@libervox.net)</a>
+    </nav>
+  </header>
+
+  <div class="subbar">
+    <div class="radio-box">
+      <strong>Rádio:</strong>
+      <select id="stationSelect">
+        <option value="bbn">BBN — Rádio Cristã (Global)</option>
+        <option value="rock">Rock &amp; Melancólico</option>
+        <option value="classica">Clássica &amp; Instrumental</option>
+      </select>
+      <button type="button" onclick="toggleRadio()">▶ / ⏹</button>
+      <span id="radioStatus">Pronta para sintonizar</span>
+    </div>
+
+    <div class="latin-audio-box">
+      <strong>Pater Noster (em latim):</strong>
+      <button type="button" onclick="togglePaterNoster()">▶ Escutar MP3</button>
+      <audio id="paterNosterAudio" src="./pater-noster.mp3"></audio>
+    </div>
+  </div>
+
+  <section class="latin-banner">
+    <div class="latin-quote">“Ego sum via, et veritas, et vita.”</div>
+    <div class="latin-translation">Tradução: “Eu sou o caminho, e a verdade, e a vida.” (João 14:6)</div>
+  </section>
+
+  <main class="grid">
+    <aside>
+      <div class="panel">
+        <div class="monogram">SO</div>
+        <div style="text-align:center; font-weight:bold;">Silvio Oliveira</div>
+        <div style="text-align:center; font-size:12px; color:var(--muted);">silvio@libervox.net • Global</div>
+        <a class="support-btn" href="https://cvv.org.br" target="_blank" rel="noopener noreferrer">
+          💛 Apoio Emocional 24h (CVV — Ligue 188 ou Chat)
+        </a>
+      </div>
+    </aside>
+
+    <section>
+      <div class="panel" id="inicio">
+        <h3>Mural de Ideias (Sem Fotos)</h3>
+        <p style="font-size:13px; margin:0 0 10px;">
+          Espaço para recados, letras, reflexões e conversas diretas com alcance global.
+        </p>
+        <div style="display:flex; gap:8px;">
+          <input id="recadoInput" type="text" placeholder="Escreva um recado ou reflexão..." style="flex:1;" />
+          <button type="button" onclick="addRecado()">Publicar</button>
+        </div>
+        <ul id="recadosLista" style="padding-left:18px; font-size:13px; margin-top:12px;">
+          <li><strong>@mari_a:</strong> Que bom ver a LiberVox ganhando forma com texto, música e verdade.</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h3>Letras Perdidas</h3>
+        <p style="font-size:13px; margin:0;">Palavra-chave musical: <strong>V _ R I T _ S</strong></p>
+        <div class="notes" id="notasDisplay">🎵 🎵 🎵 🎵 🎵 🎵</div>
+        <div style="display:flex; gap:8px;">
+          <input id="palpiteInput" type="text" maxlength="1" placeholder="Letra" style="width:70px;" />
+          <button type="button" onclick="tentarLetra()">Tentar Letra</button>
+          <span id="feedbackLetra" style="font-size:13px; align-self:center;"></span>
+        </div>
+      </div>
+
+      <div class="panel" id="encontros">
+        <h3>Ponto de Encontro (Locais Públicos por Cidade)</h3>
+        <p style="font-size:13px; margin:0;">
+          <strong>Parque Barigui • Curitiba</strong> — Encontros em espaços abertos e públicos, com dicas de reconhecimento por texto (sem fotos).
+        </p>
+      </div>
+    </section>
+
+    <aside>
+      <div class="panel">
+        <h3>Conexões Online</h3>
+        <div class="friend-row">
+          <div class="mini-mono">MA</div>
+          <div><strong>Mariana Alves</strong><br /><span style="color:var(--muted); font-size:12px;">Ouvindo BBN</span></div>
+        </div>
+        <div class="friend-row">
+          <div class="mini-mono">LM</div>
+          <div><strong>Lucas Mendes</strong><br /><span style="color:var(--muted); font-size:12px;">Escrevendo letra</span></div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    let radioTocando = false;
+    let errosLetras = 0;
+
+    function toggleRadio() {
+      const select = document.getElementById("stationSelect");
+      const status = document.getElementById("radioStatus");
+      radioTocando = !radioTocando;
+      status.textContent = radioTocando
+        ? "No ar: " + select.options[select.selectedIndex].text
+        : "Rádio pausada";
+    }
+
+    function togglePaterNoster() {
+      const audio = document.getElementById("paterNosterAudio");
+      if (audio.paused) {
+        audio.play().catch(() => {
+          alert("Envie o arquivo pater-noster.mp3 na raiz do repositório libervox para tocar o áudio.");
+        });
+      } else {
+        audio.pause();
+      }
+    }
+
+    function addRecado() {
+      const input = document.getElementById("recadoInput");
+      const lista = document.getElementById("recadosLista");
+      const texto = input.value.trim();
+      if (!texto) return;
+      const li = document.createElement("li");
+      li.innerHTML = "<strong>@silvio:</strong> " + texto.replace(/</g, "&lt;");
+      lista.prepend(li);
+      input.value = "";
+    }
+
+    function tentarLetra() {
+      const input = document.getElementById("palpiteInput");
+      const feedback = document.getElementById("feedbackLetra");
+      const notas = document.getElementById("notasDisplay");
+      const letra = input.value.trim().toUpperCase();
+      input.value = "";
+      if (!letra) return;
+
+      if (["E", "A"].includes(letra)) {
+        feedback.textContent = "A letra '" + letra + "' faz parte da palavra!";
+      } else {
+        errosLetras = Math.min(6, errosLetras + 1);
+        const acesas = "🎵 ".repeat(6 - errosLetras).trim();
+        const apagadas = "⚪ ".repeat(errosLetras).trim();
+        notas.textContent = (acesas + " " + apagadas).trim();
+        feedback.textContent = "Não estava nessa — restam " + (6 - errosLetras) + " notas.";
+      }
+    }
+  </script>
+</body>
+</html>
+
+
