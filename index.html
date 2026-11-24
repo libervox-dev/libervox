@@ -89,6 +89,17 @@
       gap: 6px;
     }
 
+    .pater-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .pater-pt-sub {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
     .latin-banner {
       max-width: 1180px;
       margin: 12px auto 0;
@@ -110,6 +121,59 @@
       font-size: 12px;
       color: var(--muted);
       margin-top: 2px;
+    }
+
+    .lyrics-panel {
+      max-width: 1180px;
+      margin: 12px auto 0;
+      padding: 14px 16px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: none;
+    }
+
+    .lyrics-panel.open {
+      display: block;
+    }
+
+    .lyrics-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+
+    .lyrics-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    @media (max-width: 720px) {
+      .lyrics-cols { grid-template-columns: 1fr; }
+    }
+
+    .lyrics-col h4 {
+      margin: 0 0 8px;
+      font-size: 13px;
+      color: var(--accent);
+      border-bottom: 1px solid #e1ebf5;
+      padding-bottom: 4px;
+    }
+
+    .lyrics-credit {
+      margin-top: 12px;
+      padding-top: 8px;
+      border-top: 1px solid #e1ebf5;
+      font-size: 11px;
+      color: var(--muted);
     }
 
     .grid {
@@ -243,6 +307,12 @@
       font-weight: bold;
     }
 
+    .secondary-btn {
+      background: #e6eff8;
+      color: var(--accent);
+      border: 1px solid var(--border);
+    }
+
     .games-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -298,18 +368,26 @@
   <div class="subbar">
     <div class="radio-box">
       <strong>Silvio Oliveira (silvio@libervox.net)</strong> — Escrevendo ideias sem filtro...
-      <select id="stationSelect">
-        <option value="bbn">Rádio: BBN (Cristã • Global)</option>
-        <option value="rock">Rádio: Rock &amp; Melancólico</option>
-        <option value="classica">Rádio: Clássica &amp; Instrumental</option>
+      <select id="stationSelect" onchange="trocarEstacao()">
+        <option value="https://streams.radiomast.io/ec065d59-f358-48c9-a288-4efc797e5860">BBN — Português (Cristã • Global)</option>
+        <option value="https://streams.radiomast.io/844b0a81-f4b9-485e-adaa-aab8d3ea9f7f">BBN — Inglês (Cristã • Global)</option>
+        <option value="https://streams.radiomast.io/475ebed1-595e-4717-b888-64fe8fc6b09f">BBN — Espanhol (Cristã • Global)</option>
+        <option value="https://streams.radiomast.io/79ce8dd0-c0e9-4443-b887-0fdc1617f8bc">BBN — Alemão (Cristã • Global)</option>
+        <option value="https://stream.srg-ssr.ch/srgssr/rsc_de/mp3/128">Música Clássica — Radio Swiss Classic (MP3)</option>
+        <option value="https://wwfm.streamguys1.com/live-mp3">Música Clássica — WWFM Classical (MP3)</option>
       </select>
-      <button type="button" onclick="toggleRadio()">▶ / ⏹</button>
-      <span id="radioStatus">Ouvindo agora: BBN • Alcance Global</span>
+      <button type="button" id="radioBtn" onclick="toggleRadio()">▶ Tocar</button>
+      <audio id="radioAudio" preload="none"></audio>
+      <span id="radioStatus">Pronta: BBN — Português (Cristã • Global)</span>
     </div>
 
     <div class="latin-audio-box">
-      <strong>Pai Nosso em latim (MP3):</strong>
+      <div class="pater-stack">
+        <strong>Pai Nosso em latim (MP3)</strong>
+        <span class="pater-pt-sub">Pai Nosso (em português abaixo)</span>
+      </div>
       <button type="button" id="paterBtn" onclick="togglePaterNoster()">▶ Escutar</button>
+      <button type="button" class="secondary-btn" onclick="togglePaterNosterLyrics()">📜 Ver Letra (PT / Latim)</button>
       <audio id="paterNosterAudio" src="./pater-noster.mp3"></audio>
       <select id="statusSelect">
         <option>Online</option>
@@ -322,6 +400,56 @@
   <section class="latin-banner">
     <div class="latin-quote">“Ego sum via, et veritas, et vita.”</div>
     <div class="latin-translation">Tradução: “Eu sou o caminho, e a verdade, e a vida.” (João 14:6)</div>
+  </section>
+
+  <section class="lyrics-panel" id="paterNosterLyrics">
+    <div class="lyrics-header">
+      <div>
+        <strong style="color:var(--accent); font-size:14px;">Pai Nosso — Comparativo Português / Latim</strong>
+        <div style="font-size:12px; color:var(--muted);">Coluna da esquerda em português • Coluna da direita em latim</div>
+      </div>
+      <button type="button" class="secondary-btn" onclick="togglePaterNosterLyrics()">Fechar</button>
+    </div>
+
+    <div class="lyrics-cols">
+      <div class="lyrics-col">
+        <h4>Português</h4>
+        <p>
+          Pai nosso, que estás nos céus,<br />
+          santificado seja o teu nome;<br />
+          venha a nós o teu reino;<br />
+          seja feita a tua vontade,<br />
+          assim na terra como no céu.<br />
+          O pão nosso de cada dia nos dá hoje;<br />
+          perdoa-nos as nossas dívidas,<br />
+          assim como nós perdoamos aos nossos devedores;<br />
+          e não nos deixes cair em tentação,<br />
+          mas livra-nos do mal.<br />
+          Amém.
+        </p>
+      </div>
+
+      <div class="lyrics-col">
+        <h4>Latim (Pater Noster)</h4>
+        <p>
+          Pater noster, qui es in caelis,<br />
+          sanctificetur nomen tuum;<br />
+          adveniat regnum tuum;<br />
+          fiat voluntas tua,<br />
+          sicut in caelo et in terra.<br />
+          Panem nostrum cotidianum da nobis hodie;<br />
+          et dimitte nobis debita nostra,<br />
+          sicut et nos dimittimus debitoribus nostris;<br />
+          et ne nos inducas in tentationem,<br />
+          sed libera nos a malo.<br />
+          Amen.
+        </p>
+      </div>
+    </div>
+
+    <div class="lyrics-credit">
+      Áudio de referência: <em>Schola Gregoriana - Pater Noster</em> (Wikimedia Commons, licença CC BY-SA 3.0).
+    </div>
   </section>
 
   <main class="grid">
@@ -448,7 +576,6 @@
   </main>
 
   <script>
-    let radioTocando = true;
     let errosLetras = 0;
     const letrasAcertadas = new Set();
     const palavraAlvo = "VERITAS";
@@ -472,13 +599,47 @@
       });
     }
 
+    function trocarEstacao() {
+      const select = document.getElementById("stationSelect");
+      const audio = document.getElementById("radioAudio");
+      const btn = document.getElementById("radioBtn");
+      const status = document.getElementById("radioStatus");
+      const url = select.value;
+      const nome = select.options[select.selectedIndex].text;
+
+      audio.pause();
+      btn.textContent = "▶ Tocar";
+      audio.src = url;
+      status.textContent = "Pronta: " + nome;
+    }
+
     function toggleRadio() {
       const select = document.getElementById("stationSelect");
+      const audio = document.getElementById("radioAudio");
+      const btn = document.getElementById("radioBtn");
       const status = document.getElementById("radioStatus");
-      radioTocando = !radioTocando;
-      status.textContent = radioTocando
-        ? "No ar: " + select.options[select.selectedIndex].text
-        : "Rádio pausada";
+      const url = select.value;
+      const nome = select.options[select.selectedIndex].text;
+
+      if (!audio.paused) {
+        audio.pause();
+        btn.textContent = "▶ Tocar";
+        status.textContent = "Pausada: " + nome;
+        return;
+      }
+
+      if (audio.src !== url) {
+        audio.src = url;
+      }
+
+      status.textContent = "Conectando: " + nome + "...";
+      audio.play().then(() => {
+        btn.textContent = "⏹ Parar";
+        status.textContent = "No ar (interno): " + nome;
+      }).catch(() => {
+        btn.textContent = "▶ Tocar";
+        status.textContent = "Não foi possível reproduzir este stream no navegador agora.";
+      });
     }
 
     function togglePaterNoster() {
@@ -494,6 +655,10 @@
         audio.pause();
         btn.textContent = "▶ Escutar";
       }
+    }
+
+    function togglePaterNosterLyrics() {
+      document.getElementById("paterNosterLyrics").classList.toggle("open");
     }
 
     function enviarCorreioInterno() {
