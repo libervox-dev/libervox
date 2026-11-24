@@ -60,14 +60,16 @@
     .nav a {
       color: #fff;
       text-decoration: none;
-      background: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.18);
       padding: 6px 10px;
-      border-radius: 3px;
-      font-size: 13px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      font-size: 12px;
+      font-weight: bold;
     }
 
     .nav a:hover {
-      background: rgba(255, 255, 255, 0.28);
+      background: rgba(255, 255, 255, 0.3);
     }
 
     .subbar {
@@ -88,6 +90,32 @@
       align-items: center;
       gap: 6px;
     }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: 4px;
+      border: 1px solid #9eb5ce;
+      background: #fff;
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+    }
+
+    .status-dot.online { background: #1fa84f; }
+    .status-dot.ausente-30 { background: #e5a100; }
+    .status-dot.ocupado-criando { background: #d93829; }
+    .status-dot.reflexao { background: #3b78b8; }
+    .status-dot.ouvindo { background: #7b4fa3; }
 
     .pater-stack {
       display: flex;
@@ -220,18 +248,39 @@
       border: 2px solid #1d446e;
     }
 
+    .profile-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-weight: bold;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .profile-status.online { color: #157a38; }
+    .profile-status.ausente-30 { color: #9a6700; }
+    .profile-status.ocupado-criando { color: #b42318; }
+    .profile-status.reflexao { color: #24578c; }
+    .profile-status.ouvindo { color: #5b367d; }
+
     .support-btn {
       display: block;
       text-align: center;
       text-decoration: none;
-      background: #fff7e6;
-      color: #7a4900;
-      border: 1px solid var(--gold);
-      padding: 7px 8px;
-      border-radius: 4px;
+      background: linear-gradient(180deg, #fffdf7 0%, #fff0c2 100%);
+      color: #6b3e00;
+      border: 1px solid #c98518;
+      box-shadow: inset 0 1px 0 #ffffff, 0 1px 2px rgba(0, 0, 0, 0.08);
+      padding: 8px;
+      border-radius: 5px;
       font-size: 12px;
       font-weight: bold;
       margin: 8px 0 10px;
+    }
+
+    .support-btn:hover {
+      background: linear-gradient(180deg, #fff9e6 0%, #ffe699 100%);
     }
 
     .stats-row {
@@ -291,26 +340,48 @@
     .mini-mono.lm { background: #3b7a57; }
     .mini-mono.ap { background: #9c4a3b; }
 
-    button, select, input {
+    select, input {
       font-family: inherit;
       font-size: 12px;
       padding: 6px 9px;
-      border-radius: 3px;
-      border: 1px solid var(--border);
+      border-radius: 4px;
+      border: 1px solid #9eb5ce;
+      background: #fff;
+      color: var(--text);
     }
 
     button {
-      background: var(--accent);
+      font-family: inherit;
+      font-size: 12px;
+      padding: 6px 11px;
+      border-radius: 5px;
+      background: linear-gradient(180deg, #4b82be 0%, #265991 100%);
       color: #fff;
-      border: none;
+      border: 1px solid #1e4673;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 1px 2px rgba(20, 45, 75, 0.18);
       cursor: pointer;
       font-weight: bold;
+      transition: filter 0.12s ease, transform 0.08s ease;
+    }
+
+    button:hover {
+      filter: brightness(1.06);
+    }
+
+    button:active {
+      transform: translateY(1px);
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25);
     }
 
     .secondary-btn {
-      background: #e6eff8;
-      color: var(--accent);
-      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #ffffff 0%, #dce9f7 100%);
+      color: #204d80;
+      border: 1px solid #8fa9c7;
+      box-shadow: inset 0 1px 0 #ffffff, 0 1px 2px rgba(20, 45, 75, 0.08);
+    }
+
+    .secondary-btn:hover {
+      background: linear-gradient(180deg, #f4f9ff 0%, #cbe0f5 100%);
     }
 
     .games-grid {
@@ -333,8 +404,9 @@
     .cell {
       width: 38px;
       height: 38px;
-      background: #eef4fa;
-      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #ffffff 0%, #e4eef9 100%);
+      border: 1px solid #96b0cc;
+      box-shadow: inset 0 1px 0 #ffffff;
       color: var(--accent);
       font-size: 15px;
       font-weight: bold;
@@ -373,10 +445,12 @@
         <option value="https://streams.radiomast.io/844b0a81-f4b9-485e-adaa-aab8d3ea9f7f">BBN — Inglês (Cristã • Global)</option>
         <option value="https://streams.radiomast.io/475ebed1-595e-4717-b888-64fe8fc6b09f">BBN — Espanhol (Cristã • Global)</option>
         <option value="https://streams.radiomast.io/79ce8dd0-c0e9-4443-b887-0fdc1617f8bc">BBN — Alemão (Cristã • Global)</option>
-        <option value="https://stream.srg-ssr.ch/srgssr/rsc_de/mp3/128">Música Clássica — Radio Swiss Classic (MP3)</option>
-        <option value="https://wwfm.streamguys1.com/live-mp3">Música Clássica — WWFM Classical (MP3)</option>
+        <option value="https://stream.srg-ssr.ch/srgssr/rsc_de/mp3/128">Radio Swiss Classic</option>
+        <option value="https://uk2.streamingpulse.com/ssl/vcr1">Venice Classic Radio</option>
+        <option value="https://ice1.somafm.com/groovesalad-128-mp3">SomaFM — Groove Salad</option>
       </select>
       <button type="button" id="radioBtn" onclick="toggleRadio()">▶ Tocar</button>
+      <button type="button" class="secondary-btn" onclick="proximaEstacao()">⏭ Próxima</button>
       <audio id="radioAudio" preload="none"></audio>
       <span id="radioStatus">Pronta: BBN — Português (Cristã • Global)</span>
     </div>
@@ -389,11 +463,16 @@
       <button type="button" id="paterBtn" onclick="togglePaterNoster()">▶ Escutar</button>
       <button type="button" class="secondary-btn" onclick="togglePaterNosterLyrics()">📜 Ver Letra (PT / Latim)</button>
       <audio id="paterNosterAudio" src="./pater-noster.mp3"></audio>
-      <select id="statusSelect">
-        <option>Online</option>
-        <option>Ausente</option>
-        <option>Ocupado</option>
-      </select>
+      <span class="status-pill">
+        <span id="statusDot" class="status-dot online"></span>
+        <select id="statusSelect" onchange="atualizarStatusCor()">
+          <option value="online">Online • Disponível</option>
+          <option value="ausente-30">Ausente • Volto em 30 min</option>
+          <option value="ocupado-criando">Ocupado • Escrevendo</option>
+          <option value="reflexao">Em Reflexão / Leitura</option>
+          <option value="ouvindo">Ouvindo Rádio / Música</option>
+        </select>
+      </span>
     </div>
   </div>
 
@@ -456,7 +535,10 @@
     <aside id="perfil">
       <div class="panel">
         <div class="monogram">SO</div>
-        <div style="text-align:center; font-weight:bold;">● Disponível</div>
+        <div id="profileStatus" class="profile-status online">
+          <span id="profileStatusDot" class="status-dot online"></span>
+          <span id="profileStatusLabel">Online • Disponível</span>
+        </div>
         <div style="text-align:center; font-size:12px; color:var(--muted);">Alcance Global • Curitiba / PR</div>
 
         <a class="support-btn" href="https://cvv.org.br" target="_blank" rel="noopener noreferrer">
@@ -522,7 +604,7 @@
         </div>
         <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">
           <button type="button" onclick="alert('Presença confirmada no Ponto de Encontro!')">✓ Confirmar Presença</button>
-          <button type="button" onclick="alert('Chat exclusivo do encontro aberto.')">💬 Chat do Encontro</button>
+          <button type="button" class="secondary-btn" onclick="alert('Chat exclusivo do encontro aberto.')">💬 Chat do Encontro</button>
         </div>
       </div>
 
@@ -581,6 +663,27 @@
     const palavraAlvo = "VERITAS";
     const velhaEstado = ["X", "", "O", "", "X", "", "", "", "O"];
 
+    const statusConfig = {
+      "online": { texto: "Online • Disponível" },
+      "ausente-30": { texto: "Ausente • Volto em 30 min" },
+      "ocupado-criando": { texto: "Ocupado • Escrevendo" },
+      "reflexao": { texto: "Em Reflexão / Leitura" },
+      "ouvindo": { texto: "Ouvindo Rádio / Música" }
+    };
+
+    function atualizarStatusCor() {
+      const estado = document.getElementById("statusSelect").value;
+      const dot = document.getElementById("statusDot");
+      const profileStatus = document.getElementById("profileStatus");
+      const profileDot = document.getElementById("profileStatusDot");
+      const profileLabel = document.getElementById("profileStatusLabel");
+
+      dot.className = "status-dot " + estado;
+      profileStatus.className = "profile-status " + estado;
+      profileDot.className = "status-dot " + estado;
+      profileLabel.textContent = statusConfig[estado].texto;
+    }
+
     function renderVelha() {
       const board = document.getElementById("velhaBoard");
       board.innerHTML = "";
@@ -604,13 +707,32 @@
       const audio = document.getElementById("radioAudio");
       const btn = document.getElementById("radioBtn");
       const status = document.getElementById("radioStatus");
+      const estavaTocando = !audio.paused;
       const url = select.value;
       const nome = select.options[select.selectedIndex].text;
 
       audio.pause();
-      btn.textContent = "▶ Tocar";
       audio.src = url;
-      status.textContent = "Pronta: " + nome;
+
+      if (estavaTocando) {
+        status.textContent = "Conectando: " + nome + "...";
+        audio.play().then(() => {
+          btn.textContent = "⏹ Parar";
+          status.textContent = "No ar (interno): " + nome;
+        }).catch(() => {
+          btn.textContent = "▶ Tocar";
+          status.textContent = "Não foi possível reproduzir este stream no navegador agora.";
+        });
+      } else {
+        btn.textContent = "▶ Tocar";
+        status.textContent = "Pronta: " + nome;
+      }
+    }
+
+    function proximaEstacao() {
+      const select = document.getElementById("stationSelect");
+      select.selectedIndex = (select.selectedIndex + 1) % select.options.length;
+      trocarEstacao();
     }
 
     function toggleRadio() {
