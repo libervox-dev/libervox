@@ -6,10 +6,9 @@
   <title>LIBERVOX • Veritas</title>
   <style>
     :root {
-      --bg-page: #c9ddf2;
+      --bg-page: #dce7f3;
       --bg-panel: #f7faff;
-      --bg-header: linear-gradient(180deg, #7fb3e6 0%, #4e83bd 52%, #3a6ea8 100%);
-      --bg-menubar: linear-gradient(180deg, #f3f8fd 0%, #dce9f7 100%);
+      --bg-header: linear-gradient(180deg, #7fb3e6 0%, #4e83bd 55%, #3a6ea8 100%);
       --bg-subbar: #e6eff8;
       --border: #9cb6d3;
       --text: #1c2833;
@@ -27,46 +26,24 @@
       color: var(--text);
     }
 
-    /* Janela estilo Windows Live Messenger */
     .topbar {
       background: var(--bg-header);
       color: #fff;
-      padding: 8px 14px;
+      padding: 8px 16px 0;
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
-      gap: 10px;
-      border-bottom: 1px solid #2b5482;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
-    }
-
-    .brand-wrap {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .brand-badge {
-      width: 22px;
-      height: 22px;
-      border-radius: 3px;
-      background: linear-gradient(180deg, #ffffff 0%, #d4e8fc 100%);
-      color: #1e548f;
-      border: 1px solid #29527e;
-      font-size: 12px;
-      font-weight: bold;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: inset 0 1px 0 #fff;
+      gap: 12px;
+      border-bottom: 2px solid #2e5988;
     }
 
     .brand {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: bold;
-      letter-spacing: 0.4px;
-      text-shadow: 0 1px 1px rgba(15, 38, 66, 0.45);
+      letter-spacing: 0.5px;
+      padding-bottom: 8px;
+      text-shadow: 0 1px 1px rgba(15, 38, 66, 0.4);
     }
 
     .brand span {
@@ -76,43 +53,6 @@
       opacity: 0.94;
     }
 
-    .win-controls {
-      display: inline-flex;
-      gap: 3px;
-      align-items: center;
-    }
-
-    .win-btn {
-      width: 24px;
-      height: 20px;
-      padding: 0;
-      font-size: 11px;
-      line-height: 1;
-      border-radius: 2px;
-      background: linear-gradient(180deg, #e8f2fc 0%, #b4d0ed 100%);
-      color: #193b61;
-      border: 1px solid #29507a;
-      box-shadow: inset 0 1px 0 #fff;
-    }
-
-    .win-btn.close-btn {
-      background: linear-gradient(180deg, #f29b8e 0%, #c94a38 100%);
-      color: #fff;
-      border-color: #7d261a;
-    }
-
-    .menubar {
-      background: var(--bg-menubar);
-      border-bottom: 1px solid var(--border);
-      padding: 4px 14px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 12px;
-    }
-
     .nav {
       display: flex;
       flex-wrap: wrap;
@@ -120,24 +60,27 @@
     }
 
     .nav a {
-      color: #18385c;
+      color: #fff;
       text-decoration: none;
-      padding: 3px 8px;
-      border-radius: 3px;
-      border: 1px solid transparent;
+      background: rgba(255, 255, 255, 0.16);
+      padding: 7px 12px;
+      border-radius: 6px 6px 0 0;
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      border-bottom: none;
       font-size: 12px;
+      font-weight: bold;
     }
 
+    .nav a.active,
     .nav a:hover {
-      background: rgba(255, 255, 255, 0.85);
-      border-color: #9cb7d4;
+      background: var(--bg-panel);
+      color: var(--accent);
     }
 
-    /* Faixa de Rádio e Pai Nosso */
     .subbar {
-      background: linear-gradient(180deg, #eef5fc 0%, #dde9f6 100%);
+      background: linear-gradient(180deg, #eef5fc 0%, #dce9f7 100%);
       border-bottom: 1px solid var(--border);
-      padding: 8px 14px;
+      padding: 8px 16px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -151,57 +94,6 @@
       flex-wrap: wrap;
       align-items: center;
       gap: 6px;
-    }
-
-    /* Cabeçalho de status tipo Windows Live Messenger */
-    .messenger-card {
-      max-width: 1180px;
-      margin: 12px auto 0;
-      padding: 10px 14px;
-      background: linear-gradient(180deg, #ffffff 0%, #eef5fc 55%, #dde9f7 100%);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      box-shadow: inset 0 1px 0 #ffffff;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .messenger-identity {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 260px;
-      flex: 1;
-    }
-
-    .messenger-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .messenger-name-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-      font-weight: bold;
-      color: #163252;
-    }
-
-    .now-listening-line {
-      font-size: 12px;
-      color: #1f62a8;
-      font-weight: bold;
-    }
-
-    .messenger-note {
-      font-size: 11px;
-      color: var(--muted);
     }
 
     .status-pill {
@@ -243,7 +135,7 @@
 
     .latin-banner {
       max-width: 1180px;
-      margin: 10px auto 0;
+      margin: 12px auto 0;
       padding: 10px 16px;
       background: var(--bg-panel);
       border: 1px solid var(--border);
@@ -266,7 +158,7 @@
 
     .lyrics-panel {
       max-width: 1180px;
-      margin: 10px auto 0;
+      margin: 12px auto 0;
       padding: 14px 16px;
       background: var(--bg-panel);
       border: 1px solid var(--border);
@@ -322,7 +214,7 @@
       margin: 12px auto 28px;
       padding: 0 12px;
       display: grid;
-      grid-template-columns: 255px 1fr 265px;
+      grid-template-columns: 245px 1fr 255px;
       gap: 14px;
     }
 
@@ -341,28 +233,26 @@
 
     .panel h3 {
       margin: 0 0 10px;
-      font-size: 13px;
+      font-size: 14px;
       color: var(--accent);
-      background: linear-gradient(180deg, #eef5fc 0%, #dce9f7 100%);
-      border: 1px solid #c2d5e8;
-      border-radius: 3px;
-      padding: 6px 8px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
     }
 
     .monogram {
-      width: 66px;
-      height: 66px;
-      border-radius: 5px;
-      background: linear-gradient(180deg, #3c77b8 0%, #245285 100%);
+      width: 76px;
+      height: 76px;
+      border-radius: 6px;
+      background: linear-gradient(180deg, #4b82be 0%, #265991 100%);
       color: #f7d358;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
+      font-size: 28px;
       font-weight: bold;
-      border: 2px solid #1a3d66;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 1px 2px rgba(0, 0, 0, 0.12);
-      flex-shrink: 0;
+      margin: 0 auto 8px;
+      border: 2px solid #1d446e;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
     }
 
     .monogram.tema-grafite {
@@ -393,7 +283,7 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
-      margin: 8px 0 10px;
+      margin: 6px 0 10px;
       font-size: 11px;
       color: var(--muted);
     }
@@ -406,7 +296,6 @@
       font-weight: bold;
       font-size: 12px;
       text-align: center;
-      margin-top: 6px;
     }
 
     .profile-status.online { color: #157a38; }
@@ -465,12 +354,93 @@
       background: linear-gradient(180deg, #6ba2dc 0%, #3d75b0 100%);
     }
 
+    .mood-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 8px;
+      font-size: 12px;
+    }
+
+    .recado-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid #e3ecf5;
+      font-size: 13px;
+    }
+
+    .recado-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #d982a8;
+      color: #1c2833;
+      font-size: 12px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    .recado-avatar.lm { background: #a8d59b; }
+    .recado-avatar.so { background: #c5d9f0; color: #1e548f; }
+
+    .recado-bubble {
+      flex: 1;
+      background: #fff7e6;
+      border: 1px solid #e6d3ad;
+      border-radius: 5px;
+      padding: 8px 10px;
+    }
+
+    .recado-bubble.azul {
+      background: #e9f2fc;
+      border-color: #c2d7ee;
+    }
+
+    .recado-meta {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .recado-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .nudge-btn {
+      background: linear-gradient(180deg, #f58b6c 0%, #d44e2a 100%);
+      color: #fff;
+      border: 1px solid #963217;
+      font-size: 11px;
+      padding: 4px 8px;
+    }
+
+    .testimonial-btn {
+      background: linear-gradient(180deg, #639cd6 0%, #3469a3 100%);
+      color: #fff;
+      border: 1px solid #224975;
+      font-size: 11px;
+      padding: 4px 8px;
+    }
+
     .group-header {
       font-size: 12px;
       font-weight: bold;
-      color: #1e4b7a;
-      background: linear-gradient(180deg, #f3f8fd 0%, #dce9f7 100%);
-      border: 1px solid #c0d4e8;
+      color: var(--accent);
+      background: #eaf2fa;
+      border: 1px solid #d0dfef;
       border-radius: 3px;
       padding: 5px 8px;
       margin-top: 8px;
@@ -486,17 +456,17 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 4px;
+      padding: 6px 2px;
       border-bottom: 1px solid #e3ecf5;
       font-size: 12px;
     }
 
     .mini-mono {
-      width: 28px;
-      height: 28px;
-      border-radius: 4px;
-      background: #7c4d8a;
-      color: #fff;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #d982a8;
+      color: #1c2833;
       font-size: 11px;
       font-weight: bold;
       display: flex;
@@ -505,8 +475,8 @@
       flex-shrink: 0;
     }
 
-    .mini-mono.lm { background: #3b7a57; }
-    .mini-mono.ap { background: #9c4a3b; }
+    .mini-mono.lm { background: #a8d59b; }
+    .mini-mono.ap { background: #f2a39b; }
 
     select, input {
       font-family: inherit;
@@ -593,20 +563,9 @@
 </head>
 <body>
   <header class="topbar">
-    <div class="brand-wrap">
-      <span class="brand-badge">V</span>
-      <div class="brand">LIBERVOX <span>• Veritas</span></div>
-    </div>
-    <div class="win-controls" aria-hidden="true">
-      <button type="button" class="win-btn" tabindex="-1">—</button>
-      <button type="button" class="win-btn" tabindex="-1">□</button>
-      <button type="button" class="win-btn close-btn" tabindex="-1">✕</button>
-    </div>
-  </header>
-
-  <div class="menubar">
+    <div class="brand">LIBERVOX <span>• Veritas</span></div>
     <nav class="nav">
-      <a href="#inicio">Início</a>
+      <a href="#inicio" class="active">Início</a>
       <a href="#perfil">Perfil</a>
       <a href="#recados">Recados (12)</a>
       <a href="#comunidades">Comunidades</a>
@@ -614,12 +573,12 @@
       <a href="#palco">Palco Aberto MP3</a>
       <a href="#email">E-mail (@libervox.net)</a>
     </nav>
-    <span style="color:var(--muted); font-size:11px;">Modo sem fotos • Identidade por texto e monograma</span>
-  </div>
+  </header>
 
   <div class="subbar">
     <div class="radio-box">
-      <strong>Rádio Interna:</strong>
+      <strong>Silvio Oliveira</strong> — Escrevendo ideias sem filtro... •
+      <span id="nowListeningLine" style="color:var(--accent); font-weight:bold;">🎵 Ouvindo agora: BBN — Português (Cristã • Global)</span>
       <select id="stationSelect" onchange="trocarEstacao()">
         <option value="https://streams.radiomast.io/ec065d59-f358-48c9-a288-4efc797e5860">BBN — Português (Cristã • Global)</option>
         <option value="https://streams.radiomast.io/844b0a81-f4b9-485e-adaa-aab8d3ea9f7f">BBN — Inglês (Cristã • Global)</option>
@@ -655,25 +614,6 @@
       </span>
     </div>
   </div>
-
-  <!-- Cabeçalho tipo Windows Live Messenger (sem foto) -->
-  <section class="messenger-card">
-    <div class="messenger-identity">
-      <div id="headerMonogram" class="monogram">SO</div>
-      <div class="messenger-meta">
-        <div class="messenger-name-row">
-          <span>Silvio Oliveira</span>
-          <span style="font-weight:normal; font-size:12px; color:var(--muted);">(silvio@libervox.net)</span>
-          <span class="status-pill" style="padding:2px 7px; font-size:11px;">
-            <span id="headerStatusDot" class="status-dot online"></span>
-            <span id="headerStatusLabel">Online • Disponível</span>
-          </span>
-        </div>
-        <div id="nowListeningLine" class="now-listening-line">🎧 Sintonizado: BBN — Português (Cristã • Global)</div>
-        <div class="messenger-note">Escrevendo ideias sem filtro • Alcance Global • Curitiba / PR</div>
-      </div>
-    </div>
-  </section>
 
   <section class="latin-banner">
     <div class="latin-quote">“Ego sum via, et veritas, et vita.”</div>
@@ -733,8 +673,7 @@
   <main class="grid">
     <aside id="perfil">
       <div class="panel">
-        <h3>Identidade &amp; Perfil</h3>
-        <div id="userMonogram" class="monogram" style="margin:0 auto 6px;">SO</div>
+        <div id="userMonogram" class="monogram">SO</div>
 
         <div class="avatar-picker">
           <label for="monogramSelect"><strong>Monograma disponível (sem foto):</strong></label>
@@ -752,6 +691,7 @@
           <span id="profileStatusDot" class="status-dot online"></span>
           <span id="profileStatusLabel">Online • Disponível</span>
         </div>
+        <div style="text-align:center; font-size:12px; color:var(--muted); margin-top:2px;">Curitiba / PR • silvio@libervox.net</div>
 
         <a class="support-btn" href="https://cvv.org.br" target="_blank" rel="noopener noreferrer">
           💛 Precisa conversar? Apoio Emocional 24h (CVV — Ligue 188 ou Chat)
@@ -799,12 +739,47 @@
       <div class="panel" id="recados">
         <h3>Mural de Recados (Sem Fotos)</h3>
         <div style="display:flex; gap:8px;">
-          <input id="recadoInput" type="text" placeholder="O que você está pensando, escrevendo ou ouvindo agora?" style="flex:1;" />
+          <input id="recadoInput" type="text" placeholder="O que você está pensando ou ouvindo agora?" style="flex:1;" />
+        </div>
+        <div class="mood-bar">
+          <div>
+            <label for="moodSelect"><strong>Humor:</strong></label>
+            <select id="moodSelect">
+              <option value="😊 Feliz">😊 Feliz</option>
+              <option value="🎵 Inspirado">🎵 Inspirado</option>
+              <option value="☕ Tranquilo">☕ Tranquilo</option>
+              <option value="✍️ Escrevendo">✍️ Escrevendo</option>
+            </select>
+          </div>
           <button type="button" onclick="addRecado()">Publicar Recado</button>
         </div>
-        <ul id="recadosLista" style="padding-left:18px; font-size:13px; margin-top:12px;">
-          <li><strong>Mariana Alves @mari_a:</strong> Li seu texto ontem e lembrei daquela música dos anos 80 que você falou :)</li>
-        </ul>
+
+        <div id="recadosLista" style="margin-top:12px;">
+          <div class="recado-item">
+            <div class="recado-avatar">MA</div>
+            <div class="recado-bubble">
+              <div class="recado-meta"><strong>Mariana Alves</strong> @mari_a • há 5 min • 😊 Feliz</div>
+              <div>Oi Silvio! Li seu texto ontem e lembrei daquela música dos anos 80 que você falou :)</div>
+              <div class="recado-actions">
+                <a href="#recados" onclick="prepararResposta('Mariana Alves'); return false;" style="font-size:12px; color:var(--accent); font-weight:bold; text-decoration:none;">Responder</a>
+                <button type="button" class="nudge-btn" onclick="chamarAtencao('Mariana Alves')">🔔 Chamar Atenção</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="recado-item">
+            <div class="recado-avatar lm">LM</div>
+            <div class="recado-bubble azul">
+              <div class="recado-meta"><strong>Lucas Mendes</strong> @lucas_m • há 22 min • 🎵 Inspirado</div>
+              <div>Alguém on para debater sobre o novo tema da comunidade de música e composição?</div>
+              <div class="recado-actions">
+                <a href="#recados" onclick="prepararResposta('Lucas Mendes'); return false;" style="font-size:12px; color:var(--accent); font-weight:bold; text-decoration:none;">Responder</a>
+                <button type="button" class="testimonial-btn" onclick="darDepoimento('Lucas Mendes')">⭐ Dar Depoimento</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="feedbackMural" style="font-size:12px; color:var(--accent); margin-top:8px;"></div>
       </div>
 
       <div class="panel" id="encontros">
@@ -852,33 +827,42 @@
 
     <aside>
       <div class="panel">
-        <h3>Contatos &amp; Grupos</h3>
+        <h3>Amigos Online</h3>
         <input id="buscaContatoInput" type="text" placeholder="Buscar contato ou grupo..." oninput="filtrarContatos()" style="width:100%; margin-bottom:6px;" />
 
         <div class="group-header" onclick="toggleGrupo('grupoAmigos')">▾ Amigos Online</div>
         <div id="grupoAmigos" class="group-body">
           <div class="friend-row" data-busca="mariana alves saudades das conversas">
             <div class="mini-mono">MA</div>
-            <div><strong>Mariana Alves</strong><br /><span style="color:var(--muted);">Saudades das conversas</span></div>
+            <div style="flex:1;">
+              <strong><span class="status-dot online"></span> Mariana Alves</strong><br />
+              <span style="color:var(--muted);">Saudades das conversas</span>
+            </div>
           </div>
-          <div class="friend-row" data-busca="lucas mendes ouvindo bbn">
+          <div class="friend-row" data-busca="lucas mendes trabalhando">
             <div class="mini-mono lm">LM</div>
-            <div><strong>Lucas Mendes</strong><br /><span style="color:var(--muted);">Ouvindo BBN</span></div>
+            <div style="flex:1;">
+              <strong><span class="status-dot ausente-30"></span> Lucas Mendes</strong><br />
+              <span style="color:var(--muted);">Trabalhando...</span>
+            </div>
           </div>
-          <div class="friend-row" data-busca="ana paula no palco aberto mp3">
+          <div class="friend-row" data-busca="ana paula ocupada">
             <div class="mini-mono ap">AP</div>
-            <div><strong>Ana Paula</strong><br /><span style="color:var(--muted);">No Palco Aberto MP3</span></div>
+            <div style="flex:1;">
+              <strong><span class="status-dot ocupado-criando"></span> Ana Paula</strong><br />
+              <span style="color:var(--muted);">Ocupada</span>
+            </div>
           </div>
         </div>
 
         <div class="group-header" onclick="toggleGrupo('grupoComunidades')">▾ Comunidades</div>
         <div id="grupoComunidades" class="group-body">
           <div class="friend-row" data-busca="veritas e fe palavra e verdade">
-            <div class="mini-mono">VF</div>
+            <div class="mini-mono lm">VF</div>
             <div><strong>Veritas &amp; Fé</strong><br /><span style="color:var(--muted);">Palavra e verdade</span></div>
           </div>
           <div class="friend-row" data-busca="compositores e letras palco aberto">
-            <div class="mini-mono lm">CL</div>
+            <div class="mini-mono ap">CL</div>
             <div><strong>Compositores &amp; Letras</strong><br /><span style="color:var(--muted);">Palco aberto</span></div>
           </div>
         </div>
@@ -903,21 +887,13 @@
     function aplicarMonograma() {
       const select = document.getElementById("monogramSelect");
       const box = document.getElementById("userMonogram");
-      const headerBox = document.getElementById("headerMonogram");
       const valor = select.value;
       const partes = valor.split("|");
       const simbolo = partes[0] || "SO";
       const tema = partes[1] || "padrao";
-      const classe = tema === "padrao" ? "monogram" : "monogram " + tema;
 
       box.textContent = simbolo;
-      box.className = classe;
-      box.style.margin = "0 auto 6px";
-
-      headerBox.textContent = simbolo;
-      headerBox.className = classe;
-      headerBox.style.margin = "0";
-
+      box.className = tema === "padrao" ? "monogram" : "monogram " + tema;
       try { localStorage.setItem("libervox_monograma", valor); } catch (e) {}
     }
 
@@ -936,24 +912,19 @@
 
     function atualizarStatusCor() {
       const estado = document.getElementById("statusSelect").value;
-      const texto = statusConfig[estado].texto;
       const dot = document.getElementById("statusDot");
-      const headerDot = document.getElementById("headerStatusDot");
-      const headerLabel = document.getElementById("headerStatusLabel");
       const profileStatus = document.getElementById("profileStatus");
       const profileDot = document.getElementById("profileStatusDot");
       const profileLabel = document.getElementById("profileStatusLabel");
 
       dot.className = "status-dot " + estado;
-      headerDot.className = "status-dot " + estado;
-      headerLabel.textContent = texto;
       profileStatus.className = "profile-status " + estado;
       profileDot.className = "status-dot " + estado;
-      profileLabel.textContent = texto;
+      profileLabel.textContent = statusConfig[estado].texto;
     }
 
     function atualizarLinhaOuvindo(texto) {
-      document.getElementById("nowListeningLine").textContent = "🎧 " + texto;
+      document.getElementById("nowListeningLine").textContent = "🎵 " + texto;
     }
 
     function toggleGrupo(id) {
@@ -966,6 +937,20 @@
         const match = !termo || (row.dataset.busca || "").includes(termo);
         row.style.display = match ? "flex" : "none";
       });
+    }
+
+    function prepararResposta(nome) {
+      const input = document.getElementById("recadoInput");
+      input.value = "@" + nome.toLowerCase().replace(/\s+/g, "_") + " ";
+      input.focus();
+    }
+
+    function chamarAtencao(nome) {
+      document.getElementById("feedbackMural").textContent = "🔔 Atenção enviada para " + nome + " na LiberVox!";
+    }
+
+    function darDepoimento(nome) {
+      document.getElementById("feedbackMural").textContent = "⭐ Depoimento aberto para " + nome + " no mural.";
     }
 
     function renderVelha() {
@@ -1040,7 +1025,7 @@
       }
 
       status.textContent = "Conectando: " + nome + "...";
-      atualizarLinhaOuvindo("Ouvindo: " + nome);
+      atualizarLinhaOuvindo("Ouvindo agora: " + nome);
       audio.play().then(() => {
         btn.textContent = "⏹ Parar";
         status.textContent = "No ar (interno): " + nome;
@@ -1056,7 +1041,7 @@
       if (audio.paused) {
         audio.play().then(() => {
           btn.textContent = "⏸ Pausar";
-          atualizarLinhaOuvindo("Ouvindo: Pai Nosso em latim (pater-noster.mp3)");
+          atualizarLinhaOuvindo("Ouvindo agora: Pai Nosso em latim (pater-noster.mp3)");
         }).catch(() => {
           alert("Envie o arquivo pater-noster.mp3 na raiz do repositório libervox para tocar o áudio.");
         });
@@ -1084,12 +1069,20 @@
 
     function addRecado() {
       const input = document.getElementById("recadoInput");
+      const mood = document.getElementById("moodSelect").value;
       const lista = document.getElementById("recadosLista");
       const texto = input.value.trim();
       if (!texto) return;
-      const li = document.createElement("li");
-      li.innerHTML = "<strong>Silvio @silvio:</strong> " + texto.replace(/</g, "&lt;");
-      lista.prepend(li);
+
+      const div = document.createElement("div");
+      div.className = "recado-item";
+      div.innerHTML =
+        '<div class="recado-avatar so">SO</div>' +
+        '<div class="recado-bubble azul">' +
+        '<div class="recado-meta"><strong>Silvio Oliveira</strong> @silvio • agora mesmo • ' + mood + '</div>' +
+        '<div>' + texto.replace(/</g, "&lt;") + '</div>' +
+        '</div>';
+      lista.prepend(div);
       input.value = "";
     }
 
@@ -1132,5 +1125,3 @@
   </script>
 </body>
 </html>
-
-
