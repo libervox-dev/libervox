@@ -435,6 +435,52 @@
       padding: 4px 8px;
     }
 
+    .english-box {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .course-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
+    .course-link-btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      background: #eaf2fa;
+      color: var(--accent);
+      border: 1px solid #9cb6d3;
+      font-weight: bold;
+    }
+
+    .course-link-btn:hover {
+      background: #dce9f7;
+    }
+
+    .english-guide {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      background: #eef5fc;
+      border: 1px solid #c6daee;
+      border-radius: 4px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .english-guide.open {
+      display: block;
+    }
+
     .group-header {
       font-size: 12px;
       font-weight: bold;
@@ -720,14 +766,15 @@
 <body>
   <header class="topbar">
     <div class="brand">LIBERVOX <span>• Veritas</span></div>
-    <nav class="nav">
-      <a href="#inicio" class="active">Início</a>
-      <a href="#perfil">Perfil</a>
-      <a href="#recados">Recados (12)</a>
-      <a href="#comunidades">Comunidades</a>
-      <a href="#encontros">Ponto de Encontro</a>
-      <a href="#palco">Palco Aberto MP3</a>
-      <a href="#email">E-mail (@libervox.net)</a>
+    <nav class="nav" id="mainNav">
+      <a href="#inicio" class="active" onclick="ativarAba(this)">Início</a>
+      <a href="#curso-ingles" onclick="ativarAba(this, true)">Curso de Inglês</a>
+      <a href="#perfil" onclick="ativarAba(this)">Perfil</a>
+      <a href="#recados" onclick="ativarAba(this)">Recados (12)</a>
+      <a href="#comunidades" onclick="ativarAba(this)">Comunidades</a>
+      <a href="#encontros" onclick="ativarAba(this)">Ponto de Encontro</a>
+      <a href="#palco" onclick="ativarAba(this)">Palco Aberto MP3</a>
+      <a href="#email" onclick="ativarAba(this)">E-mail (@libervox.net)</a>
     </nav>
   </header>
 
@@ -892,6 +939,68 @@
     </aside>
 
     <section>
+      <div class="panel" id="curso-ingles">
+        <h3>Curso de Inglês — Acesso Direto</h3>
+        <div class="english-box">
+          <select id="englishLessonSelect" onchange="trocarLicaoIngles()">
+            <option value="https://streams.radiomast.io/844b0a81-f4b9-485e-adaa-aab8d3ea9f7f">Stream Ativo — BBN Inglês (Escuta Diária)</option>
+            <option value="https://uk2.streamingpulse.com/ssl/vcr1">Stream Ativo — Venice Classic (Fundo Musical)</option>
+          </select>
+          <button type="button" id="englishBtn" onclick="toggleLicaoIngles()">▶ Escutar</button>
+          <button type="button" class="secondary-btn" onclick="toggleGuiaIngles()">📘 Frases Básicas (EN / PT)</button>
+          <audio id="englishAudio" preload="none" src="https://streams.radiomast.io/844b0a81-f4b9-485e-adaa-aab8d3ea9f7f"></audio>
+          <span id="englishStatus" style="color:var(--muted);">Stream carregado</span>
+        </div>
+
+        <div class="course-links">
+          <a class="course-link-btn" href="https://learningenglish.voanews.com/p/5609.html" target="_blank" rel="noopener noreferrer">VOA Beginning Level</a>
+          <a class="course-link-btn" href="https://learningenglish.voanews.com/p/5644.html" target="_blank" rel="noopener noreferrer">VOA Let's Learn English (Level 1)</a>
+          <a class="course-link-btn" href="https://www.bbc.co.uk/learningenglish" target="_blank" rel="noopener noreferrer">BBC Learning English</a>
+          <a class="course-link-btn" href="https://archive.org/details/easyenglish0000unse" target="_blank" rel="noopener noreferrer">Internet Archive — Easy English</a>
+        </div>
+
+        <div id="englishGuide" class="english-guide">
+          <strong>Frases básicas para começar (ouça e repita em voz alta):</strong><br />
+          • <em>Hello! How are you?</em> — Olá! Como você está?<br />
+          • <em>I am fine, thank you.</em> — Estou bem, obrigado(a).<br />
+          • <em>My name is Silvio.</em> — Meu nome é Silvio.<br />
+          • <em>Can you repeat that slowly?</em> — Você pode repetir isso devagar?
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Música em Inglês com Tradução (Stream Ativo)</h3>
+        <div class="english-box">
+          <select id="songSelect" onchange="trocarMusicaIngles()">
+            <option value="https://ice1.somafm.com/groovesalad-128-mp3">Stream Ativo — SomaFM Groove Salad</option>
+            <option value="https://streams.radiomast.io/844b0a81-f4b9-485e-adaa-aab8d3ea9f7f">Stream Ativo — BBN Inglês</option>
+          </select>
+          <button type="button" id="songBtn" onclick="toggleMusicaIngles()">▶ Tocar Música</button>
+          <button type="button" class="secondary-btn" onclick="toggleTraducaoMusica()">🎵 Ver Tradução (EN / PT)</button>
+          <audio id="songAudio" preload="none" src="https://ice1.somafm.com/groovesalad-128-mp3"></audio>
+          <span id="songStatus" style="color:var(--muted);">Stream carregado</span>
+        </div>
+
+        <div id="songTranslationBox" class="english-guide">
+          <div class="lyrics-cols">
+            <div>
+              <strong>Inglês (Original)</strong><br />
+              <em>Walk through the quiet morning light,<br />
+              Hold onto hope when the day feels long,<br />
+              Every step brings a clearer sight,<br />
+              Sing your truth like a steady song.</em>
+            </div>
+            <div>
+              <strong>Português (Tradução)</strong><br />
+              Caminhe pela luz tranquila da manhã,<br />
+              Segure a esperança quando o dia parecer longo,<br />
+              Cada passo traz um olhar mais claro,<br />
+              Cante a sua verdade como uma canção firme.
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="panel" id="recados">
         <h3>Mural de Recados (Sem Fotos)</h3>
         <div style="display:flex; gap:8px;">
@@ -1080,6 +1189,114 @@
       "reflexao": { texto: "Em Reflexão / Leitura" },
       "ouvindo": { texto: "Ouvindo Rádio / Música" }
     };
+
+    function ativarAba(linkEl, abrirGuia) {
+      document.querySelectorAll("#mainNav a").forEach((a) => a.classList.remove("active"));
+      linkEl.classList.add("active");
+      if (abrirGuia) {
+        document.getElementById("englishGuide").classList.add("open");
+      }
+    }
+
+    function trocarLicaoIngles() {
+      const select = document.getElementById("englishLessonSelect");
+      const audio = document.getElementById("englishAudio");
+      const btn = document.getElementById("englishBtn");
+      const status = document.getElementById("englishStatus");
+      const estavaTocando = !audio.paused;
+
+      audio.pause();
+      audio.src = select.value;
+      if (estavaTocando) {
+        audio.play().then(() => {
+          btn.textContent = "⏸ Pausar";
+          status.textContent = "No ar: " + select.options[select.selectedIndex].text;
+        }).catch(() => {
+          btn.textContent = "▶ Escutar";
+          status.textContent = "Não foi possível tocar este stream agora.";
+        });
+      } else {
+        btn.textContent = "▶ Escutar";
+        status.textContent = "Stream carregado";
+      }
+    }
+
+    function toggleLicaoIngles() {
+      const select = document.getElementById("englishLessonSelect");
+      const audio = document.getElementById("englishAudio");
+      const btn = document.getElementById("englishBtn");
+      const status = document.getElementById("englishStatus");
+
+      if (audio.paused) {
+        audio.src = select.value;
+        status.textContent = "Conectando...";
+        audio.play().then(() => {
+          btn.textContent = "⏸ Pausar";
+          status.textContent = "No ar: " + select.options[select.selectedIndex].text;
+          atualizarLinhaOuvindo("Inglês: " + select.options[select.selectedIndex].text);
+        }).catch(() => {
+          status.textContent = "Não foi possível reproduzir este stream no navegador.";
+        });
+      } else {
+        audio.pause();
+        btn.textContent = "▶ Escutar";
+        status.textContent = "Pausada";
+      }
+    }
+
+    function toggleGuiaIngles() {
+      document.getElementById("englishGuide").classList.toggle("open");
+    }
+
+    function trocarMusicaIngles() {
+      const select = document.getElementById("songSelect");
+      const audio = document.getElementById("songAudio");
+      const btn = document.getElementById("songBtn");
+      const status = document.getElementById("songStatus");
+      const estavaTocando = !audio.paused;
+
+      audio.pause();
+      audio.src = select.value;
+      if (estavaTocando) {
+        audio.play().then(() => {
+          btn.textContent = "⏹ Parar";
+          status.textContent = "Tocando: " + select.options[select.selectedIndex].text;
+        }).catch(() => {
+          btn.textContent = "▶ Tocar Música";
+          status.textContent = "Não foi possível tocar este stream agora.";
+        });
+      } else {
+        btn.textContent = "▶ Tocar Música";
+        status.textContent = "Stream carregado";
+      }
+    }
+
+    function toggleMusicaIngles() {
+      const select = document.getElementById("songSelect");
+      const audio = document.getElementById("songAudio");
+      const btn = document.getElementById("songBtn");
+      const status = document.getElementById("songStatus");
+
+      if (audio.paused) {
+        audio.src = select.value;
+        status.textContent = "Conectando...";
+        audio.play().then(() => {
+          btn.textContent = "⏹ Parar";
+          status.textContent = "Tocando: " + select.options[select.selectedIndex].text;
+          atualizarLinhaOuvindo("Música em inglês: " + select.options[select.selectedIndex].text);
+        }).catch(() => {
+          status.textContent = "Não foi possível reproduzir este stream no navegador.";
+        });
+      } else {
+        audio.pause();
+        btn.textContent = "▶ Tocar Música";
+        status.textContent = "Pausada";
+      }
+    }
+
+    function toggleTraducaoMusica() {
+      document.getElementById("songTranslationBox").classList.toggle("open");
+    }
 
     function carregarAmigosSalvos() {
       try {
