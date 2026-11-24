@@ -496,12 +496,12 @@
     .mini-mono.lm { background: #a8d59b; }
     .mini-mono.ap { background: #f2a39b; }
 
-    /* Janela de conversa flutuante acima */
+    /* Janela flutuante de conversa e discussão de comunidade */
     .chat-window {
       position: fixed;
       right: 20px;
       bottom: 20px;
-      width: 335px;
+      width: 350px;
       max-width: calc(100vw - 24px);
       background: var(--bg-panel);
       border: 1px solid #2d5a8a;
@@ -540,6 +540,15 @@
       font-size: 11px;
     }
 
+    .comm-topic-bar {
+      background: #f5f9fe;
+      border-bottom: 1px solid #d5e3f2;
+      padding: 6px 10px;
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
     .friend-toggle-btn {
       font-size: 11px;
       padding: 4px 8px;
@@ -574,6 +583,7 @@
     }
 
     .chat-subbar.minimized,
+    .comm-topic-bar.minimized,
     .chat-body.minimized,
     .chat-footer.minimized {
       display: none;
@@ -581,7 +591,7 @@
 
     .chat-body {
       padding: 10px;
-      max-height: 240px;
+      max-height: 250px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
@@ -593,8 +603,15 @@
     .chat-msg {
       padding: 7px 9px;
       border-radius: 5px;
-      max-width: 88%;
+      max-width: 92%;
       line-height: 1.4;
+    }
+
+    .chat-msg-author {
+      font-size: 10px;
+      font-weight: bold;
+      color: var(--accent);
+      margin-bottom: 2px;
     }
 
     .chat-msg.them {
@@ -966,8 +983,8 @@
 
     <aside>
       <div class="panel">
-        <h3>Contatos &amp; Amigos</h3>
-        <div style="font-size:11px; color:var(--muted); margin-bottom:6px;">Clique no contato para conversar e gerenciar amizade.</div>
+        <h3>Contatos &amp; Comunidades</h3>
+        <div style="font-size:11px; color:var(--muted); margin-bottom:6px;">Clique num contato para conversar ou numa comunidade para entrar na discussão.</div>
         <input id="buscaContatoInput" type="text" placeholder="Buscar contato ou grupo..." oninput="filtrarContatos()" style="width:100%; margin-bottom:6px;" />
 
         <div class="group-header" onclick="toggleGrupo('grupoAmigos')">▾ Contatos Online</div>
@@ -997,11 +1014,11 @@
 
         <div class="group-header" onclick="toggleGrupo('grupoComunidades')">▾ Comunidades</div>
         <div id="grupoComunidades" class="group-body">
-          <div class="friend-row" data-busca="veritas e fe palavra e verdade" onclick="abrirConversa('Veritas & Fé', 'Comunidade • Ativa', 'Bem-vindo ao espaço de diálogo e palavra.')">
+          <div class="friend-row" data-busca="veritas e fe palavra e verdade" onclick="abrirComunidade('Veritas & Fé', 'Tópico ativo: Verdade, fé e escuta atenta no dia a dia')">
             <div class="mini-mono lm">VF</div>
             <div><strong>Veritas &amp; Fé</strong><br /><span style="color:var(--muted);">Palavra e verdade</span></div>
           </div>
-          <div class="friend-row" data-busca="compositores e letras palco aberto" onclick="abrirConversa('Compositores & Letras', 'Comunidade • Ativa', 'Compartilhe suas letras e ideias sem pressa.')">
+          <div class="friend-row" data-busca="compositores e letras palco aberto" onclick="abrirComunidade('Compositores & Letras', 'Tópico ativo: Letra, métrica e arranjos acústicos sem pressa')">
             <div class="mini-mono ap">CL</div>
             <div><strong>Compositores &amp; Letras</strong><br /><span style="color:var(--muted);">Palco aberto</span></div>
           </div>
@@ -1010,7 +1027,7 @@
     </aside>
   </main>
 
-  <!-- Janela flutuante de conversa ao clicar no contato -->
+  <!-- Janela flutuante de conversa privada ou discussão da comunidade -->
   <div class="chat-window" id="chatWindow" role="dialog" aria-label="Janela de conversa">
     <div class="chat-titlebar">
       <div>
@@ -1026,6 +1043,7 @@
       <span id="chatFriendshipLabel">Status do contato: Contato</span>
       <button type="button" id="friendToggleBtn" class="friend-toggle-btn" onclick="alternarAmigo()">⭐ Tornar Amigo</button>
     </div>
+    <div class="comm-topic-bar" id="commTopicBar"></div>
     <div class="chat-body" id="chatBody"></div>
     <div class="chat-footer" id="chatFooter">
       <input id="chatInput" type="text" placeholder="Digite sua mensagem..." style="flex:1;" onkeydown="if(event.key==='Enter') enviarMensagemChat()" />
@@ -1039,9 +1057,21 @@
     const palavraAlvo = "VERITAS";
     const velhaEstado = ["X", "", "O", "", "X", "", "", "", "O"];
     let contatoAtivo = "";
+    let modoAtual = "contato";
     const historicosChat = {};
     const amigosSet = new Set();
     const contatosIndividuais = new Set(["Mariana Alves", "Lucas Mendes", "Ana Paula"]);
+
+    const discussoesIniciaisComunidade = {
+      "Veritas & Fé": [
+        { autor: "them", remetente: "Rafael Costa", texto: "Como vocês mantêm a serenidade nas discussões do dia a dia?" },
+        { autor: "them", remetente: "Beatriz Lima", texto: "Escrevendo com calma e ouvindo antes de responder." }
+      ],
+      "Compositores & Letras": [
+        { autor: "them", remetente: "Lucas Mendes", texto: "Alguém testou colocar violão dedilhado em andamento mais lento?" },
+        { autor: "them", remetente: "Ana Paula", texto: "Sim! Deixa a letra respirar bem mais no refrão." }
+      ]
+    };
 
     const statusConfig = {
       "online": { texto: "Online • Disponível" },
@@ -1089,17 +1119,15 @@
     }
 
     function atualizarBotaoAmigoNaJanela() {
-      if (!contatoAtivo) return;
       const subbar = document.getElementById("chatSubbar");
-      const label = document.getElementById("chatFriendshipLabel");
-      const btn = document.getElementById("friendToggleBtn");
-
-      if (!contatosIndividuais.has(contatoAtivo)) {
+      if (!contatoAtivo || modoAtual !== "contato" || !contatosIndividuais.has(contatoAtivo)) {
         subbar.style.display = "none";
         return;
       }
 
       subbar.style.display = "flex";
+      const label = document.getElementById("chatFriendshipLabel");
+      const btn = document.getElementById("friendToggleBtn");
       const ehAmigo = amigosSet.has(contatoAtivo);
       if (ehAmigo) {
         label.textContent = "Status do contato: Amigo";
@@ -1113,7 +1141,7 @@
     }
 
     function alternarAmigo() {
-      if (!contatoAtivo || !contatosIndividuais.has(contatoAtivo)) return;
+      if (!contatoAtivo || modoAtual !== "contato" || !contatosIndividuais.has(contatoAtivo)) return;
       if (amigosSet.has(contatoAtivo)) {
         amigosSet.delete(contatoAtivo);
       } else {
@@ -1123,18 +1151,45 @@
     }
 
     function abrirConversa(nome, statusTexto, mensagemInicial) {
+      modoAtual = "contato";
       contatoAtivo = nome;
       document.getElementById("chatContactName").textContent = nome;
       document.getElementById("chatContactStatus").textContent = statusTexto;
+      document.getElementById("commTopicBar").style.display = "none";
+      document.getElementById("chatInput").placeholder = "Digite sua mensagem...";
 
       if (!historicosChat[nome]) {
-        historicosChat[nome] = [{ autor: "them", texto: mensagemInicial }];
+        historicosChat[nome] = [{ autor: "them", remetente: nome, texto: mensagemInicial }];
       }
 
       atualizarBotaoAmigoNaJanela();
       renderizarMensagensChat();
-      document.getElementById("chatSubbar").classList.remove("minimized");
       document.getElementById("chatBody").classList.remove("minimized");
+      document.getElementById("commTopicBar").classList.remove("minimized");
+      document.getElementById("chatFooter").classList.remove("minimized");
+      document.getElementById("chatWindow").classList.add("open");
+      document.getElementById("chatInput").focus();
+    }
+
+    function abrirComunidade(nomeComunidade, topicoTexto) {
+      modoAtual = "comunidade";
+      contatoAtivo = nomeComunidade;
+      document.getElementById("chatContactName").textContent = nomeComunidade;
+      document.getElementById("chatContactStatus").textContent = "Discussão aberta da comunidade";
+      document.getElementById("chatSubbar").style.display = "none";
+
+      const topicBar = document.getElementById("commTopicBar");
+      topicBar.textContent = "💬 " + topicoTexto;
+      topicBar.style.display = "block";
+      document.getElementById("chatInput").placeholder = "Participar da discussão...";
+
+      if (!historicosChat[nomeComunidade]) {
+        historicosChat[nomeComunidade] = (discussoesIniciaisComunidade[nomeComunidade] || []).map((m) => ({ ...m }));
+      }
+
+      renderizarMensagensChat();
+      document.getElementById("chatBody").classList.remove("minimized");
+      document.getElementById("commTopicBar").classList.remove("minimized");
       document.getElementById("chatFooter").classList.remove("minimized");
       document.getElementById("chatWindow").classList.add("open");
       document.getElementById("chatInput").focus();
@@ -1146,8 +1201,19 @@
       const msgs = historicosChat[contatoAtivo] || [];
       msgs.forEach((m) => {
         const div = document.createElement("div");
-        div.className = "chat-msg " + (m.autor === "me" ? "me" : "them");
-        div.textContent = m.texto;
+        const ehMeu = m.autor === "me";
+        div.className = "chat-msg " + (ehMeu ? "me" : "them");
+
+        if (modoAtual === "comunidade") {
+          const autorLabel = document.createElement("div");
+          autorLabel.className = "chat-msg-author";
+          autorLabel.textContent = ehMeu ? "Silvio Oliveira" : (m.remetente || "Membro");
+          div.appendChild(autorLabel);
+        }
+
+        const textoEl = document.createElement("div");
+        textoEl.textContent = m.texto;
+        div.appendChild(textoEl);
         body.appendChild(div);
       });
       body.scrollTop = body.scrollHeight;
@@ -1161,15 +1227,20 @@
       if (!historicosChat[contatoAtivo]) {
         historicosChat[contatoAtivo] = [];
       }
-      historicosChat[contatoAtivo].push({ autor: "me", texto });
+      historicosChat[contatoAtivo].push({ autor: "me", remetente: "Silvio Oliveira", texto });
       input.value = "";
       renderizarMensagensChat();
 
       const nomeAtual = contatoAtivo;
+      const modoSnapshot = modoAtual;
       setTimeout(() => {
+        const respostaTexto = modoSnapshot === "comunidade"
+          ? "Ótimo ponto, Silvio! Vamos aprofundando esse assunto aqui na comunidade."
+          : "Recebi aqui, Silvio! Seguimos conversando por aqui.";
         historicosChat[nomeAtual].push({
           autor: "them",
-          texto: "Recebi aqui, Silvio! Seguimos conversando por aqui."
+          remetente: modoSnapshot === "comunidade" ? "Membro da comunidade" : nomeAtual,
+          texto: respostaTexto
         });
         if (contatoAtivo === nomeAtual) {
           renderizarMensagensChat();
@@ -1179,6 +1250,7 @@
 
     function minimizarConversa() {
       document.getElementById("chatSubbar").classList.toggle("minimized");
+      document.getElementById("commTopicBar").classList.toggle("minimized");
       document.getElementById("chatBody").classList.toggle("minimized");
       document.getElementById("chatFooter").classList.toggle("minimized");
     }
@@ -1429,4 +1501,3 @@
   </script>
 </body>
 </html>
-
